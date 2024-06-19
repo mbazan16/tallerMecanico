@@ -5,9 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CocheServicio implements IservicioCoche {
+public class FichaCocheServicio implements IFichaCoche {
 
-	Logger log = LoggerFactory.getLogger(CocheServicio.class);
+	Logger log = LoggerFactory.getLogger(FichaCocheServicio.class);
 
 //	@Autowired
 //	private CocheRepositorio cocheRepositorio; 
