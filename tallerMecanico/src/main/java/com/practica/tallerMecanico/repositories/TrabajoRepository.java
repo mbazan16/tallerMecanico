@@ -8,6 +8,6 @@ import com.practica.tallerMecanico.entities.Trabajo;
 
 public interface TrabajoRepository extends JpaRepository <Trabajo, Integer>{
 	
-	List<Trabajo> findAllByFechaInicio(LocalDate fechaInicio);
+	List<Trabajo>  findAllByFechaInicio(LocalDate fechaInicio);
 
 }
