@@ -1,4 +1,4 @@
-package com.tallerMecanico.entities;
+package com.practica.tallerMecanico.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
