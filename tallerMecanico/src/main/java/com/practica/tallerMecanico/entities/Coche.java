@@ -1,22 +1,18 @@
 package com.practica.tallerMecanico.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="coche")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Coche{
-	@Id
-	@Column(name="id_coche")
-	private long id_coche;
-	@Column(name="matricula")
+	private long id;
 	private String matricula;
-	@Column(name="kilometraje")
 	private Integer kilometraje;
-	@Column(name="marca")
 	private int marca;
-	@Column(name="modelo")
 	private int modelo;
 }
