@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.practica.tallerMecanico.entities.Trabajos;
 
 @Service
-public class TrabajosService implements ITrabajosService{
+public class DashboardServicio implements IDashboard{
 	//Trazas
 		public static final Logger log = LoggerFactory.getLogger(Trabajo.class);
 	@Autowired
