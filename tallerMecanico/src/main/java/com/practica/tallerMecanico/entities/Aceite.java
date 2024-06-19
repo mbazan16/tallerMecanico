@@ -13,8 +13,8 @@ public class Aceite extends Pieza{
 
 	private String viscosidad;
 	
-	public Aceite(int id, float precio, String viscosidad) {
-        super(id,precio);
+	public Aceite(int id, float precio,String nombre, String viscosidad) {
+        super(id,nombre,precio);
         this.viscosidad = viscosidad;
     }
 }

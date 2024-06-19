@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Filtro extends Pieza{
 
-	private String tipo;
+	private int tipo;
 	
-	public Filtro(int id, float precio, String tipo) {
-        super(id,precio);
+	public Filtro(int id, float precio,String nombre, int tipo) {
+        super(id,nombre,precio);
         this.tipo = tipo;
     }
 }
