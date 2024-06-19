@@ -23,7 +23,7 @@ public class Trabajo {
 	private String tipo;
 	private String descripcion;
 	private int horas;
-	private int estado;
+	private EstadoTrabajo estado;
 	private int prioridad;
 	private LocalDateTime fechaProgramacion;
 	private LocalDateTime fechaInicio;
