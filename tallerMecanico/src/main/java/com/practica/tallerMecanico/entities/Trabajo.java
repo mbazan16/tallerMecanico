@@ -3,6 +3,7 @@ package com.practica.tallerMecanico.entities;
 import java.time.LocalDateTime;
 
 import com.practica.tallerMecanico.common.EstadoTrabajo;
+import com.practica.tallerMecanico.common.Prioridad;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Trabajo {
 	private String descripcion;
 	private int horas;
 	private EstadoTrabajo estado;
-	private int prioridad;
+	private Prioridad prioridad;
 	private LocalDateTime fechaProgramacion;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
@@ -38,6 +39,12 @@ public class Trabajo {
 	private boolean marcaObservacion;
 	private float precio;
 	
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mecanico_id")
+	private Mecanico mecanico;
+	private int tipoTrabajo_id;
+	
+
 	
 	
 	
