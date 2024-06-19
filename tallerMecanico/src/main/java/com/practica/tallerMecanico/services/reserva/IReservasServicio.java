@@ -1,6 +1,8 @@
 package com.practica.tallerMecanico.services.reserva;
 
-public interface IServicioReservas{
+import com.practica.tallerMecanico.entities.Reserva;
+
+public interface IReservasServicio{
 	
 	public Reserva crearReserva(Reserva reserva);
 	
