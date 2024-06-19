@@ -8,61 +8,35 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="JOB")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Trabajo {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="JOB_ID")
 	private int id;
-	
-	@Column(name="JOB_TYPE")
 	private String tipo;
-	
-	@Column(name="JOB_DESCRIPTION")
 	private String descripcion;
-	
-	@Column(name="JOB_HOURS")
 	private int horas;
-	
-	@Column(name="JOB_STATE")
-	private String estado;
-	
-	@Column(name="JOB_PRIORITY")
-	private String prioridad;
-	
-	@Column(name="JOB_PROGRAMING_DATE")
-	private LocalDateTime fecha_programacion;
-	
-	@Column(name="JOB_START_DATE")
-	private LocalDateTime fecha_inicio;
-	
-	@Column(name="JOB_END_DATE")
-	private LocalDateTime fecha_fin;
-	
-	@Column(name="JOB_RELEASE_DATE")
-	private LocalDateTime fecha_entrega;
-	
-	@Column(name="JOB_DATE_COLLECTION")
-	private LocalDateTime fecha_recogida;
-	
-	@Column(name="JOB_OBSERVATIONS")
+	private int estado;
+	private int prioridad;
+	private LocalDateTime fechaProgramacion;
+	private LocalDateTime fechaInicio;
+	private LocalDateTime fechaFin;
+	private LocalDateTime fechaEntrega;
+	private LocalDateTime fechaRecogida;
 	private String observaciones;
-	
-	@Column(name="JOB_ENTRY_KM")
-	private int kilometros_de_entrada;
-	
-	@Column(name="JOB_EXIT_KM")
-	private int kilometros_de_salida;
-	
-	@Column(name="JOB_MCA_OBSERVATION")
-	private Boolean marca_observacion;
-	
-	@Column(name="JOB_PRICE")
-	private Float precio;
+	private int kmEntrada;
+	private int kmSalida;
+	private boolean marcaObservacion;
+	private float precio;
 	
 	
 	
