@@ -1,16 +1,19 @@
 package com.practica.tallerMecanico.entities;
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "RESERVAS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,10 +23,17 @@ public class Reserva {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String xx;
+	private String matricula;
 
-	private String yy;
+	private String cliente;
 
-	private Integer zz;
+	private String tipo;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechareserva;
+
+	private String prioridad;
+
+	private String observaciones;
 
 }
