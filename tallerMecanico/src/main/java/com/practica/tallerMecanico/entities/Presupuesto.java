@@ -1,6 +1,9 @@
 package com.practica.tallerMecanico.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,12 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aceite extends Pieza{
-
-	private String viscosidad;
+public class Presupuesto {
 	
-	public Aceite(int id, float precio,String nombre, String viscosidad) {
-        super(id,nombre,precio);
-        this.viscosidad = viscosidad;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
 }
