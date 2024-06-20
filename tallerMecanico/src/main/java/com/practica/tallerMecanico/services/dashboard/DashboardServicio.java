@@ -16,15 +16,29 @@ public class DashboardServicio implements IDashboard{
 	//Trazas
 		public static final Logger log = LoggerFactory.getLogger(Trabajo.class);
 	@Autowired
-	Trabajo trabajo = new Trabajo();
+	private TrabajoRepository trabajoRepository;
+	
+	LocalDate fechaHoy = LocalDate.now();
+	
 	
 	//Trabajo Programado hoy: obtener una lista de trabajos programados para hoy(fecha)
 
 	public List<Trabajo> getTrabajosHoy() {
-		LocalDate fechaHoy = LocalDate.now();
-        return TrabajoRepository.findAllByFechaInicio(fechaHoy);
+		log.info("[Lista trabajos para hoy:]");
+		List<Trabajo> trabajos = trabajoRepository.findAllByFechaInicio(fechaHoy);
+		log.info("Obteniendo trabajos de hoy (" + fechaHoy + "): " + trabajos.size() + " trabajos encontrados.");
+		return trabajos;
 
-		
 	}
+	//Trabajo terminados antes de la fecha actual
+	public List<Trabajo> getTrabajosTerminadosAntesDe() {
+		log.info("[listaTrabajos]");
 
+        return trabajoRepository.findAllByFechaEntregaBefore(fechaHoy);
+    }
+	//Trabajos pendientes de empezar
+	public List<Trabajo> getTrabajosPendientes() {
+		log.info("[listaTrabajos]");
+        return trabajoRepository.findAllByFechaInicioAfter(fechaHoy);
+    }
 }

@@ -22,17 +22,21 @@ public class Reserva {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String matricula;
-
-	private String cliente;
-
-	private String tipo;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaReserva;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechareserva;
+	private Date fechaEntrega;
 
-	private String prioridad;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaProgramacion;
 
-	private String observaciones;
+	private String Prioridad;
+
+	private Integer idCoche;
+
+	private Integer idCliente;
+
+	private Integer idTrabajo;
 
 }
