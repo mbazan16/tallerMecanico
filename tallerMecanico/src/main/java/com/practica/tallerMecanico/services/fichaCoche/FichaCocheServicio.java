@@ -1,7 +1,5 @@
 package com.practica.tallerMecanico.services.fichaCoche;
 
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.practica.tallerMecanico.entities.Coche;
 import com.practica.tallerMecanico.repositories.ClienteRepository;
 import com.practica.tallerMecanico.repositories.CocheRepository;
+import com.practica.tallerMecanico.services.common.FichaCocheException;
 
 public class FichaCocheServicio implements IFichaCoche {
 
@@ -22,9 +21,10 @@ public class FichaCocheServicio implements IFichaCoche {
 
 
 	//GET COCHE BY ID
-	public Optional<Coche> getCocheById(Long id){
+	public Coche getCocheById(Long id){
 		
-		return cocheRepository.findById(id);
+		return cocheRepository.findById(id)
+				.orElseThrow(() -> new FichaCocheException("Coche no encontrado con ID: " + id));
 	}
 
 //	//GET CLIENTE BY COCHE ID
