@@ -22,8 +22,11 @@ public class Mecanico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(nullable = false)
 	private String nombre;
+	@Column(nullable = false)
 	private String apellidos;
+	@Column(nullable = false)
 	private Double costeHora;
 	@OneToMany(mappedBy = "mecanico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Trabajo> trabajos = new ArrayList<>();
