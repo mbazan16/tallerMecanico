@@ -1,10 +1,14 @@
 package com.practica.tallerMecanico.services.reserva;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.practica.tallerMecanico.entities.Reserva;
+import com.practica.tallerMecanico.repositories.ReservaRepository;
+import com.practica.tallerMecanico.services.reserva.exceptions.ReservaException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,23 +16,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ReservasServicio implements IReservasServicio{
 	
-	//@Autowired
-	//Repositorio repository;
+	@Autowired
+	ReservaRepository repository;
 	
 	public Reserva crearReserva(Reserva reserva) {
-//		log.info("[crearReserva]");
-//		log.debug("[Reserva: "+reserva.toString()+"]");
-		
-		//reserva = repository.save(reserva);
+		log.info("[crearReserva]");
+		log.debug("[Reserva: "+reserva.toString()+"]");
+		try {
+			
+			repository.save(reserva);
+		} catch(Exception e) {
+			log.error("Error al crear reserva", e);
+		}
 		return reserva;
 	}
 
-	public void modificarReserva(Reserva reserva) {
-//		log.info("[modificarReserva]");
-//		log.debug("[Reserva: "+reserva.toString()+"]");
-		
+	public List<Reserva> listarReservas(Reserva reserva) {
+		log.info("[modificarReserva]");
+		log.debug("[Reserva: "+reserva.toString()+"]");
+		repository.findAll();
 		//modificar reserva
-		
+		return null;
 	}
 
 	
