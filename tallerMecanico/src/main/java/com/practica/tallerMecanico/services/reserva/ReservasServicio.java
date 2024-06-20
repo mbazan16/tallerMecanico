@@ -23,21 +23,36 @@ public class ReservasServicio implements IReservasServicio{
 		log.info("[crearReserva]");
 		log.debug("[Reserva: "+reserva.toString()+"]");
 		try {
-			
 			repository.save(reserva);
+			//el estado tiene que estar como pendiente por defecto
 		} catch(Exception e) {
 			log.error("Error al crear reserva", e);
 		}
 		return reserva;
 	}
-
-	public List<Reserva> listarReservas(Reserva reserva) {
+	
+	public void modificarReserva(Reserva reserva) {
 		log.info("[modificarReserva]");
 		log.debug("[Reserva: "+reserva.toString()+"]");
-		repository.findAll();
-		//modificar reserva
-		return null;
+		//comprobar que cambios se estan modificando y almacenarlos?
 	}
+	
+	public void anularReserva(Reserva reserva) {
+		log.info("[anularReserva]");
+		log.debug("[Reserva: "+reserva.toString()+"]");
+		//modificar estado reserva a anulada y almacenarla?
+	}
+	
+	public List<Reserva> listarReservas(Reserva reserva) {
+		log.info("[listarReserva]");
+		log.debug("[Reserva: "+reserva.toString()+"]");
+		
+		List<Reserva> reservas = repository.findAll();
+		return reservas;
+	}
+
+
+
 
 	
 }
