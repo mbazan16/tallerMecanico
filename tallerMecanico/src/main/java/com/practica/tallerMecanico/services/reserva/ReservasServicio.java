@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.practica.tallerMecanico.entities.Reserva;
 import com.practica.tallerMecanico.repositories.ReservaRepository;
-import com.practica.tallerMecanico.services.reserva.exceptions.ReservaException;
 
 import lombok.extern.slf4j.Slf4j;
 
