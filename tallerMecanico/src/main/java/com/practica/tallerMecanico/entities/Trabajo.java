@@ -42,6 +42,7 @@ public class Trabajo {
 	private boolean marcaObservacion;
 	private float precio;
 	private Mecanico mecanico;
+	private 
 	
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipoTrabajo_id")
