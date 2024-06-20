@@ -42,15 +42,8 @@ public class Trabajo {
 	private boolean marcaObservacion;
 	private float precio;
 	private Mecanico mecanico;
-	private 
 	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipoTrabajo_id")
-    private TipoTrabajo tipoTrabajo;
-	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pieza_id")
-    private Pieza pieza;
+
 	
 	
 	
