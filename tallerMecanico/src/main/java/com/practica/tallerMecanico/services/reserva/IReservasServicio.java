@@ -12,5 +12,6 @@ public interface IReservasServicio{
 	
 	public void anularReserva(Reserva reserva);
 	
-	public List<Reserva> listarReservas(Reserva reserva);	
+	public List<Reserva> listarReservas(Reserva reserva);
+	
 }

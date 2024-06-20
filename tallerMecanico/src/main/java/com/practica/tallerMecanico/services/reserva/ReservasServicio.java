@@ -23,8 +23,8 @@ public class ReservasServicio implements IReservasServicio{
 		log.info("[crearReserva]");
 		log.debug("[Reserva: "+reserva.toString()+"]");
 		try {
-			repository.save(reserva);
-			//el estado tiene que estar como pendiente por defecto
+			//inicializar el estado de la reserva que recibo
+			reserva = repository.save(reserva);
 		} catch(Exception e) {
 			log.error("Error al crear reserva", e);
 		}
