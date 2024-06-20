@@ -32,14 +32,15 @@ public class DashboardServicio implements IDashboard{
 		//si esa fecha de inicio coincide con la fecha de hoy
 		
 		try{
-			List<Trabajo> trabajos=trabajoRepository.findAllByFechaProgramacion(LocalDate.now(), idMecanico);	
+			List<Trabajo> trabajos=trabajoRepository.findAllByFProgramacion(LocalDate.now(), idMecanico);	
 			
 			List<TrabajoLPH> trabajosLPH = trabajos.stream().map(this::map).collect(Collectors.toList());
+			return trabajosLPH;		
+
 			}
 		catch(Exception e) {
 			e.printStackTrace();
 		}		
-		return trabajosLPH;		
 
 		//Traza
 		log.info("Obteniendo trabajos de hoy");
@@ -49,7 +50,7 @@ public class DashboardServicio implements IDashboard{
   
 	//SERVICIO #2: Trabajos pendientes de empezar
 	public List<Trabajo> getTrabajosPendientes() {
-		List<Trabajo> trabajos= trabajoRepository.findAllByFechaProgramacion(LocalDate.now(), idMecanico);
+		List<Trabajo> trabajos= trabajoRepository.findAllByFProgramacion(LocalDate.now(), idMecanico);
 		return trabajos;
     }
 	
