@@ -27,7 +27,7 @@ public class Cliente{
 	private String telefono;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="Cliente_Coche",
+	@JoinTable(name="Cliente-Coche",
 	joinColumns=@JoinColumn(name="idCliente"),
 	inverseJoinColumns=@JoinColumn(name="idCoche"))
 	private Set<Coche> coches;
