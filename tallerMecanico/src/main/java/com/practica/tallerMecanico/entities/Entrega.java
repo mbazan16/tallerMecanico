@@ -21,6 +21,7 @@ public class Entrega {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	private String 
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaEntrega;
