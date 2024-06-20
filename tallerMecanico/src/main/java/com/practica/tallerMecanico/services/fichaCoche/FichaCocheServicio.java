@@ -1,14 +1,13 @@
 package com.practica.tallerMecanico.services.fichaCoche;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.practica.tallerMecanico.entities.Cliente;
 import com.practica.tallerMecanico.entities.Coche;
+import com.practica.tallerMecanico.repositories.ClienteRepository;
 import com.practica.tallerMecanico.repositories.CocheRepository;
 
 public class FichaCocheServicio implements IFichaCoche {
@@ -17,28 +16,26 @@ public class FichaCocheServicio implements IFichaCoche {
 
 	@Autowired
 	private CocheRepository cocheRepository; 
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
 
-	public List<Coche> getAllCoches() {
-		log.info("[getAllCoches]");
 
-		List<Coche> coches = cocheRepository.findAll();
-
-		coches.forEach(c -> log.debug(c.toString()));
-		
-		return coches;
-	}
-
-	public Optional<Coche> getCocheById(Integer id){
-		
-		
+	//GET COCHE BY ID
+	public Optional<Coche> getCocheById(Long id){
 		
 		return cocheRepository.findById(id);
 	}
 
-	public List<Cliente> getClientesByCocheId(Integer id){
-		
-		return null;
-	}
+//	//GET CLIENTE BY COCHE ID
+//	public List<Cliente> getClientesByCocheId(Long id){
+//		
+//	Optional<Coche> coche =	cocheRepository.findById(id);
+//
+////	Cliente cliente = clienteRepository.findByCoche(coche);
+//	
+//		return null; //cliente
+//	}
 
 	// Historico Trabajadores
 

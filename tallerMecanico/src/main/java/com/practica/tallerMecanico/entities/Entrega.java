@@ -2,6 +2,8 @@ package com.practica.tallerMecanico.entities;
 
 import java.util.Date;
 
+import com.practica.tallerMecanico.common.ReservaEstado;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,7 +23,6 @@ public class Entrega {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String 
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaEntrega;
@@ -36,5 +37,7 @@ public class Entrega {
 	private Integer idCliente;
 
 	private Integer idTrabajo;
+	
+	private ReservaEstado reservaestado;
 
 }
