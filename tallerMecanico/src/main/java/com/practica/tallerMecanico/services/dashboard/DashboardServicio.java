@@ -63,13 +63,12 @@ public class DashboardServicio implements IDashboard{
 			if(matricula == null || matricula.trim().isEmpty())
 				throw new ServiceException(MessageError.EC_EXCEPCION_GENERAL);
 			//La propia logica de negocio
-			trabajosXmatricula= trabajoRepository.findByCocheMatricula(matricula);
+			trabajosXmatricula= trabajoRepository.findAllByMatricula(matricula);
 		}catch(ServiceException ae) {
 			log.error("ServiceException", ae);
 			throw ae;
 		} catch (Exception e) {
 			log.error("Exception", e);
-			throw new Exception();
 		}
 		return trabajosXmatricula;
 
