@@ -1,22 +1,215 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="Richard Alejandro Silva" />
+    <meta name="author" content="Sonia Fernandez" />
     <link th:href="@{/logos/favicon16.png}" rel="shortcut icon" type="image/png">
     <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css}" rel="stylesheet" />
     <script th:src="@{https://use.fontawesome.com/releases/v6.3.0/js/all.js}" crossorigin="anonymous"></script>
     <title>Dashboard Taller Mecanico </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-
 <body class="">
 
+ <div th:insert="fragments :: nav"></div>
+
+
+<!--Hacer un Div Que va a ocupar el 100% de la pantalla 
+    Hacer un div  que ocupe solo la mitad izquierda
+    Hacer la lista de trabajos Pendientes 
+    Hacer un div Que ocupe la mitad derecha
+    Hacer la lista de trabajos en Ejecucion
+    Hacer un div que divida este otro div a la mitad 
+    Hacer la lista de trabajois pendientes-->
+                  
+        <div class="container">
+        <h1>DASHBOARD</h1>
+        <div class="container-fluid full-height">
+            <div class="row full-height">
+                <!-- Mitad izquierda -->
+                <div class="col-6">
+                    <h2>Trabajos Programados</h2>
+                    <!-- Formulario de búsqueda -->
+                    <form action="/buscar" method="get">
+                        <div class="form-group">
+                            <label for="matricula">Matrícula</label>
+                            <input type="text" id="matricula" name="matricula" class="form-control" placeholder="Ingrese la matrícula">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Ingrese el teléfono">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </form>
+                    <!-- Tabla de trabajos programados -->
+                    <div class="table-container">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Columna 1</th>
+                                    <th>Columna 2</th>
+                                    <th>Columna 3</th>
+                                    <th>Columna 4</th>
+                                    <th>Columna 5</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fila 1 Columna 1</td>
+                                    <td>Fila 1 Columna 2</td>
+                                    <td>Fila 1 Columna 3</td>
+                                    <td>Fila 1 Columna 4</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Fila 2 Columna 1</td>
+                                    <td>Fila 2 Columna 2</td>
+                                    <td>Fila 2 Columna 3</td>
+                                    <td>Fila 2 Columna 4</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Fila 3 Columna 1</td>
+                                    <td>Fila 3 Columna 2</td>
+                                    <td>Fila 3 Columna 3</td>
+                                    <td>Fila 3 Columna 4</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Fila 4 Columna 1</td>
+                                    <td>Fila 4 Columna 2</td>
+                                    <td>Fila 4 Columna 3</td>
+                                    <td>Fila 4 Columna 4</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Fila 5 Columna 1</td>
+                                    <td>Fila 5 Columna 2</td>
+                                    <td>Fila 5 Columna 3</td>
+                                    <td>Fila 5 Columna 4</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>Fila 6 Columna 1</td>
+                                    <td>Fila 6 Columna 2</td>
+                                    <td>Fila 6 Columna 3</td>
+                                    <td>Fila 6 Columna 4</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Mitad derecha -->
+                <div class="col-6 full-height">
+                    <!-- Parte superior derecha -->
+                    <div class="half-height">
+                        <h2>Trabajos en Ejecución</h2>
+                    </div>
+                    <!-- Tabla de trabajos en ejecución -->
+                        <div class="table-container">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Columna 1</th>
+                                        <th>Columna 2</th>
+                                        <th>Columna 3</th>
+                                        <th>Columna 4</th>
+                                        <th>Columna 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Fila 1 Columna 1</td>
+                                        <td>Fila 1 Columna 2</td>
+                                        <td>Fila 1 Columna 3</td>
+                                        <td>Fila 1 Columna 4</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fila 2 Columna 1</td>
+                                        <td>Fila 2 Columna 2</td>
+                                        <td>Fila 2 Columna 3</td>
+                                        <td>Fila 2 Columna 4</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fila 3 Columna 1</td>
+                                        <td>Fila 3 Columna 2</td>
+                                        <td>Fila 3 Columna 3</td>
+                                        <td>Fila 3 Columna 4</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    <!-- Parte inferior derecha -->
+                    <div class="half-height">
+                        <h2>Trabajos Pendientes</h2>
+                         <!-- Formulario para búsqueda específica -->
+                        <form action="/buscarPendientes" method="get">
+                            <div class="form-group">
+                                <label for="matriculaPendiente">Matrícula</label>
+                                <input type="text" id="matriculaPendiente" name="matriculaPendiente" class="form-control" placeholder="Ingrese la matrícula">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoPendiente">Teléfono</label>
+                                <input type="text" id="telefonoPendiente" name="telefonoPendiente" class="form-control" placeholder="Ingrese el teléfono">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </form>
+                        <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Columna 1</th>
+                                        <th>Columna 2</th>
+                                        <th>Columna 3</th>
+                                        <th>Columna 4</th>
+                                        <th>Columna 5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Fila 1 Columna 1</td>
+                                        <td>Fila 1 Columna 2</td>
+                                        <td>Fila 1 Columna 3</td>
+                                        <td>Fila 1 Columna 4</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fila 2 Columna 1</td>
+                                        <td>Fila 2 Columna 2</td>
+                                        <td>Fila 2 Columna 3</td>
+                                        <td>Fila 2 Columna 4</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fila 3 Columna 1</td>
+                                        <td>Fila 3 Columna 2</td>
+                                        <td>Fila 3 Columna 3</td>
+                                        <td>Fila 3 Columna 4</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fila 4 Columna 1</td>
+                                        <td>Fila 4 Columna 2</td>
+                                        <td>Fila 4 Columna 3</td>
+                                        <td>Fila 4 Columna 4</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                  
+
+<!--  -->Comentarios-->
     <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js}"
         crossorigin="anonymous"></script>
     <script th:src="@{https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js}"
