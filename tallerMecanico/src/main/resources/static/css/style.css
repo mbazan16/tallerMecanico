@@ -11310,3 +11310,23 @@ body {
 .centroAbajo{
   padding: 3em;
 }
+
+/* Dashboard */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .full-height {
+            height: 100%;
+        }
+        .half-width {
+            width: 50%;
+            float: left;
+        }
+        .half-height {
+            height: 50%;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+
