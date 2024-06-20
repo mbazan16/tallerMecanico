@@ -17,15 +17,14 @@
     <div th:insert="fragments :: nav"></div>
 
     <!-- Contenedor principal -->
-    <div class="container">
+    <div class="container-fluid full-height">
         <h1>DASHBOARD</h1>
-        <div class="container-fluid full-height">
-            <div class="row full-height">
+          <div class="row">
                 <!-- Mitad izquierda -->
                 <div class="col-md-6">
                     <h2>Trabajos programados</h2>
                     <!-- Formulario de búsqueda -->
-                    <form action="/buscar" method="get">
+                    <form action="/buscar" method="get" class="form-inline mb-3">
                         <div class="form-group">
                             <label for="matricula">Matrícula</label>
                             <input type="text" id="matricula" name="matricula" class="form-control" placeholder="Ingrese la matrícula">

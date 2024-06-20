@@ -41,7 +41,15 @@ public class Trabajo {
 	private int kmSalida;
 	private boolean marcaObservacion;
 	private float precio;
+	
+	@ManyToOne	
 	private Mecanico mecanico;
+	
+	@ManyToOne	
+	private Coche coche;
+	
+	@ManyToOne	
+	private Cliente cliente;
 	
 
 	
