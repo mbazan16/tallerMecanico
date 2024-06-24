@@ -69,9 +69,9 @@ public class ReservasServicio implements IReservasServicio{
 		List<Reserva> reservas = null;
 		try {
 			if(matricula==null || matricula.equals("")) {
-				//reservas = repository.findByMatricula();
+				//reservas = repository.findByMatricula(); findAllByCocheMatricula
 			}else {
-				//reservas = repository.findByTelefono();
+				//reservas = repository.findByTelefono(); findAllByClienteTelefono
 			}
 			if(reservas.isEmpty()) throw new ReservaException(/*Error de sin elementos*/ErrorCode.EC_EXCEPCION_GENERAL);
 		} catch(ReservaException re) {
