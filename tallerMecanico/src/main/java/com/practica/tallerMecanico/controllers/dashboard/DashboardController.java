@@ -22,12 +22,18 @@ public class DashboardController {
 	    private DashboardServicio dashboardServicio;	    
 	    
 	    //Servicio trabajos para hoy
-	    @GetMapping("/trabajosHoy")
+	    @GetMapping
 	    public String tablaTrabajosHoy(Model model) throws ServiceException {
 	        List<Trabajo> trabajosHoy = dashboardServicio.getTrabajosHoy(LocalDate.now());
 	        model.addAttribute("trabajosHoy", trabajosHoy);	
+	        List<Trabajo> trabajosPendientes = dashboardServicio.getTrabajosPendientes();
+	        model.addAttribute("trabajosPendientes", trabajosPendientes);	
+	        List<Trabajo> trabajosEjecucion = dashboardServicio.getTrabajosEjecucion();
+	        model.addAttribute("trabajosEjecucion", trabajosEjecucion);	
 			return "dashboard";		
 	    }
+	   
+	    
 	}
 
 

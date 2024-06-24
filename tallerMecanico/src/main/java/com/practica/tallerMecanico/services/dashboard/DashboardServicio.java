@@ -1,8 +1,10 @@
 package com.practica.tallerMecanico.services.dashboard;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,10 +77,31 @@ public class DashboardServicio implements IDashboard{
 
 	}
 	//SERVICIO #4: Iniciar Trabajo mediante el botón Iniciar para trabajos programados, para hoy o no.
-	
+	public void cambiarEstadoTrabajo(Integer id){
+		Trabajo trabajo = trabajoRepository.findById(id).get();
+		if(id!=null) {
+		Trabajo trabajoOpt = new Trabajo();
+		trabajoOpt.setId(id);
+		trabajoOpt.setEstado(EstadoTrabajo.EJECUCION);
+		trabajoOpt.setFechaInicio(LocalDateTime.now());
+		trabajoRepository.save(trabajo);
+		}
+
+	}
 	
 	
 	//SERVICIO #5: Listado de Trabajos en Ejecución
+	public List<Trabajo> getTrabajosEjecucion() throws ServiceException{
+		log.info("[getTrabajosEjecucion]");		
+		List<Trabajo> trabajosEjecucion = new ArrayList<Trabajo>();
+		try {
+			//La propia logica de negocio
+			trabajosEjecucion= trabajoRepository.findAllByEstado(EstadoTrabajo.EJECUCION);
+		}catch (Exception e) {
+			log.error("Exception", e);
+		}
+		return trabajosEjecucion;
+    }
 	//SERVICIO #6: Terminar Trabajo, dar el trabajo por concluido. En este punto se realizará el cálculo del coste total del trabajo, insertándolo en la base de datos.
 
 
