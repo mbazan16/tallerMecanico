@@ -43,10 +43,7 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Integer> {
     
   //Ficha Coche
     @Query("select t from Trabajo t where t.cliente.id= :id order by t.fechaInicio desc, t.prioridad")
-    List<Trabajo> findAllByCliente(@Param("id")Long idCliente); //Trabajos por cliente
-    
-     
-    
+    List<Trabajo> findAllByCliente(@Param("id")Long idCliente); //Trabajos por cliente    
     
 }
 

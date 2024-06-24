@@ -1,17 +1,14 @@
 package com.practica.tallerMecanico.services.dashboard;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.practica.tallerMecanico.dto.TrabajoLPH;
 import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
 import com.practica.tallerMecanico.services.common.MessageError;
@@ -27,34 +24,29 @@ public class DashboardServicio implements IDashboard{
 	
 	//SERVICIO #1: Trabajo Programado hoy: obtener una lista de trabajos programados para hoy(fecha)
 
-	public List<TrabajoLPH> getTrabajosHoy(Long idMecanico) {
-		//metodo para obtener una lista de trabajos, la filtramos por fecha de inicio y luego devuelve los trabajos
-		//si esa fecha de inicio coincide con la fecha de hoy
-		
+	public List<Trabajo> getTrabajosHoy(LocalDate fechaHoy) throws ServiceException{
+		log.info("[Listado Trabajos Hoy]");
+		List<Trabajo> trabajosHoy = new ArrayList<Trabajo>();
 		try{
-			List<Trabajo> trabajos=trabajoRepository.findAllByFProgramacion(LocalDate.now(), idMecanico);	
-			
-			List<TrabajoLPH> trabajosLPH = trabajos.stream().map(this::map).collect(Collectors.toList());
-			return trabajosLPH;		
-
-			}
-		catch(Exception e) {
-			e.printStackTrace();
-		}		
-
-		//Traza
-		log.info("Obteniendo trabajos de hoy");
-		//se devuelve los trabajos filtrados que su fecha de programacion coincide con la fecha de hoy
-	}
+			//Validacion de parametros
+			if(fechaHoy == null)
+				throw new ServiceException(MessageError.EC_EXCEPCION_GENERAL);
+			//La lógica de negocio que devuelve una lista de trabajos segun la programacion
+			trabajosHoy=trabajoRepository.findAllByFProgramacion(LocalDate.now());
+		}catch (Exception e) {
+			log.error("Exception", e);
+		}
+			return trabajosHoy;
+		}
 	
   
 	//SERVICIO #2: Trabajos pendientes de empezar
 	public List<Trabajo> getTrabajosPendientes() {
-		List<Trabajo> trabajos= trabajoRepository.findAllByFProgramacion(LocalDate.now(), idMecanico);
+		List<Trabajo> trabajos= trabajoRepository.findAllByFProgramacion(LocalDate.now());
 		return trabajos;
     }
 	
-	//SERVICIO #3:Buscador por matrícula del coche o teléfono del cliente en trabajos programados para hoy
+	//SERVICIO #3:Buscador por matrícula del coche del cliente en trabajos programados para hoy
 	public List<Trabajo> buscador(String matricula)throws ServiceException{
 		log.info("[buscador]");
 		log.debug("[matricula:"+matricula+"]");
@@ -77,12 +69,6 @@ public class DashboardServicio implements IDashboard{
 	//SERVICIO #4: Iniciar Trabajo mediante el botón Iniciar para trabajos programados, para hoy o no.
 	//SERVICIO #5: Listado de Trabajos en Ejecución
 	//SERVICIO #6: Terminar Trabajo, dar el trabajo por concluido. En este punto se realizará el cálculo del coste total del trabajo, insertándolo en la base de datos.
-
-	//metodo para mapear dto
-	private  TrabajoLPH map(Trabajo trabajo) {
-		TrabajoLPH trabajoLPH = new TrabajoLPH();
-		return trabajoLPH;
-	}
 
 
 
