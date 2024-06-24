@@ -15,7 +15,7 @@ import com.practica.tallerMecanico.services.dashboard.DashboardServicio;
 
 
 @Controller
-@RequestMapping(value={"/","/dashboard"})
+@RequestMapping(value={"/dashboard"})
 public class DashboardController {
 
 	    @Autowired
