@@ -21,7 +21,7 @@ public class FichaCocheServicio implements IFichaCoche {
 
 
 	//GET COCHE BY ID
-	public Coche getCocheById(Long id){
+	public Coche getCocheById(Long id){ //Añadir Excepciones
 		
 		return cocheRepository.findById(id)
 				.orElseThrow(() -> new FichaCocheException("Coche no encontrado con ID: " + id));
