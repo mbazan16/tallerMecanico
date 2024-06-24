@@ -28,6 +28,22 @@ public class DashboardController {
 	        model.addAttribute("trabajosHoy", trabajosHoy);	
 			return "dashboard";		
 	    }
+	    //Servicio trabajos pendientes
+	    @GetMapping("/trabajosPendientes")
+	    public String tablaTrabajosPendientes(Model model) throws ServiceException {
+	        List<Trabajo> trabajosPendientes = dashboardServicio.getTrabajosPendientes();
+	        model.addAttribute("trabajosPendientes", trabajosPendientes);	
+			return "dashboard";		
+	    }
+	    //Servicio trabajos ejecucion
+	    @GetMapping("/trabajosEjecucion")
+	    public String tablaTrabajosEjecucion(Model model) throws ServiceException {
+	        List<Trabajo> trabajosEjecucion = dashboardServicio.getTrabajosEjecucion();
+	        model.addAttribute("trabajosEjecucion", trabajosEjecucion);	
+			return "dashboard";		
+	    }
+		//SERVICIO #5: Listado de Trabajos en Ejecución
+	    
 	}
 
 
