@@ -78,7 +78,7 @@ public class DashboardServicio implements IDashboard{
 	}
 	//SERVICIO #4: Iniciar Trabajo mediante el botón Iniciar para trabajos programados, para hoy o no.
 	public void cambiarEstadoTrabajo(Integer id){
-		Optional<Trabajo> trabajo = trabajoRepository.findById(id);
+		Trabajo trabajo = trabajoRepository.findById(id).get();
 		if(id!=null) {
 		Trabajo trabajoOpt = new Trabajo();
 		trabajoOpt.setId(id);
