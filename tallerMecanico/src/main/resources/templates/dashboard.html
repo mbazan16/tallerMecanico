@@ -17,12 +17,12 @@
     <div th:insert="fragments :: nav"></div>
 
     <!-- Contenedor principal -->
-    <div class="container-fluid full-height">
-        <h1>DASHBOARD</h1>
+    <div class="container-fluid full-height text-center">
+        <h1 class="my-4">DASHBOARD</h1>
           <div class="row">
                 <!-- Mitad izquierda -->
                 <div class="col-md-6">
-                    <h2>Trabajos programados</h2>
+                    <h2>Listado de trabajos programados</h2>
                     <!-- Formulario de búsqueda -->
                     <form action="/buscar" method="get" class="form-inline mb-3">
                         <div class="form-group">
@@ -33,27 +33,59 @@
                     </form>
                     <!-- Tabla de trabajos programados -->
                     <div class="table-container">
-                        <table class="table table-bordered">
+                        <table th:action="@{/trabajosHoy}" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Columna 1</th>
-                                    <th>Columna 2</th>
-                                    <th>Columna 3</th>
-                                    <th>Columna 4</th>
-                                    <th>Acciones</th>
+                                    <th>Fecha</th>
+                                    <th>Matrícula</th>
+                                    <th>Tipo de Trabajo</th>
+                                    <th>Horas estimadas</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Fila 1 Columna 1</td>
-                                    <td>Fila 1 Columna 2</td>
-                                    <td>Fila 1 Columna 3</td>
-                                    <td>Fila 1 Columna 4</td>
-                                    <td>Fila 1 Columna 5</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr>
                                 <!-- Más filas aquí -->
+                                <tr>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr> 
+                                <tr>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr> 
+                                <tr>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr> 
+                                <tr>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
+                                <tr>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td>xxx</td>
+                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -62,44 +94,47 @@
                 <div class="col-md-6">
                     <!-- Parte superior derecha -->
                     <div class="half-height">
-                        <h2>Trabajos en Ejecución</h2>
+                        <h2>Listado de trabajos en ejecución</h2>
                         <!-- Tabla de trabajos en ejecución -->
                         <div class="table-container">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Columna 1</th>
-                                        <th>Columna 2</th>
-                                        <th>Columna 3</th>
-                                        <th>Columna 4</th>
-                                        <th>Acciones</th>
+                                        <th>Fecha</th>
+                                        <th>Matrícula</th>
+                                        <th>Tipo de Trabajo</th>
+                                        <th>Horas estimadas</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Fila 1 Columna 1</td>
-                                        <td>Fila 1 Columna 2</td>
-                                        <td>Fila 1 Columna 3</td>
-                                        <td>Fila 1 Columna 4</td>
-                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td><button class="btn btn-primary">Terminar</button></td>
                                     </tr>
                                     <!-- Más filas aquí -->
+                                    <tr>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td><button class="btn btn-primary">Terminar</button></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <!-- Parte inferior derecha -->
                     <div class="half-height">
-                        <h2>Trabajos Pendientes</h2>
+                        <h2>Listado de trabajos pendientes</h2>
                         <!-- Formulario para búsqueda específica -->
-                        <form action="/buscarPendientes" method="get">
+                        <form action="/buscarPendientes" method="get" class="form-inline mb-3">
                             <div class="form-group">
                                 <label for="matriculaPendiente">Matrícula</label>
                                 <input type="text" id="matriculaPendiente" name="matriculaPendiente" class="form-control" placeholder="Ingrese la matrícula">
-                            </div>
-                            <div class="form-group">
-                                <label for="telefonoPendiente">Teléfono</label>
-                                <input type="text" id="telefonoPendiente" name="telefonoPendiente" class="form-control" placeholder="Ingrese el teléfono">
                             </div>
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </form>
@@ -108,22 +143,36 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Columna 1</th>
-                                        <th>Columna 2</th>
-                                        <th>Columna 3</th>
-                                        <th>Columna 4</th>
-                                        <th>Acciones</th>
+                                        <th>Fecha</th>
+                                        <th>Matrícula</th>
+                                        <th>Tipo de Trabajo</th>
+                                        <th>Horas estimadas</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Fila 1 Columna 1</td>
-                                        <td>Fila 1 Columna 2</td>
-                                        <td>Fila 1 Columna 3</td>
-                                        <td>Fila 1 Columna 4</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
                                         <td><button class="btn btn-primary">Iniciar</button></td>
                                     </tr>
                                     <!-- Más filas aquí -->
+                                    <tr>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td>xxx</td>
+                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
