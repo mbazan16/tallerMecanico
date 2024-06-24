@@ -42,8 +42,16 @@ public class DashboardServicio implements IDashboard{
 	
   
 	//SERVICIO #2: Trabajos pendientes de empezar
-	public List<Trabajo> getTrabajosPendientes() {
-		return null;
+	public List<Trabajo> getTrabajosPendientes() throws ServiceException{
+		log.info("[getTrabajosPendientes]");		
+		List<Trabajo> trabajosPendientes = new ArrayList<Trabajo>();
+		try {
+			//La propia logica de negocio
+			trabajosPendientes= trabajoRepository.findAllByEstado(EstadoTrabajo.PEDIENTE);
+		}catch (Exception e) {
+			log.error("Exception", e);
+		}
+		return trabajosPendientes;
     }
 	
 	//SERVICIO #3:Buscador por matrícula del coche del cliente en trabajos programados para hoy
@@ -67,6 +75,9 @@ public class DashboardServicio implements IDashboard{
 
 	}
 	//SERVICIO #4: Iniciar Trabajo mediante el botón Iniciar para trabajos programados, para hoy o no.
+	
+	
+	
 	//SERVICIO #5: Listado de Trabajos en Ejecución
 	//SERVICIO #6: Terminar Trabajo, dar el trabajo por concluido. En este punto se realizará el cálculo del coste total del trabajo, insertándolo en la base de datos.
 
