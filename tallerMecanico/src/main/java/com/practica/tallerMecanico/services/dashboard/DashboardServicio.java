@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.practica.tallerMecanico.common.EstadoTrabajo;
 import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
 import com.practica.tallerMecanico.services.common.MessageError;
@@ -42,8 +43,7 @@ public class DashboardServicio implements IDashboard{
   
 	//SERVICIO #2: Trabajos pendientes de empezar
 	public List<Trabajo> getTrabajosPendientes() {
-		List<Trabajo> trabajos= trabajoRepository.findAllByFProgramacion(LocalDate.now());
-		return trabajos;
+		return null;
     }
 	
 	//SERVICIO #3:Buscador por matrícula del coche del cliente en trabajos programados para hoy
