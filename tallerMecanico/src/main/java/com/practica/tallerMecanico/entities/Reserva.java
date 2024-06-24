@@ -2,6 +2,8 @@ package com.practica.tallerMecanico.entities;
 
 import java.util.Date;
 
+import com.practica.tallerMecanico.common.ReservaEstado;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +33,9 @@ public class Reserva {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaProgramacion;
 
-	private String Prioridad;
+	private String prioridad;
+	
+	private ReservaEstado reservaEstado;
 
 	private Integer idCoche;
 
