@@ -10,7 +10,7 @@ public interface IDashboard {
 	
 	//Trabajo Programado hoy: obtener una lista de trabajos programados para hoy(fecha)
 	public List<Trabajo> getTrabajosHoy(LocalDate fechaHoy) throws ServiceException;
-	public List<Trabajo> getTrabajosPendientes();
+	public List<Trabajo> getTrabajosPendientes()throws ServiceException;
 	public List<Trabajo> buscador(String matricula)throws ServiceException;
 
 
