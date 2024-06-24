@@ -53,7 +53,7 @@ public class EntregaServicio implements IEntregaServicio {
         trabajo.setFechaEntrega(fechaProcesada);
         repository.save(trabajo);
         
-        log.info("Fecha y estado actualizados correctamente en la base de datos.");
+        log.info("Fecha actualizada correctamente en la base de datos.");
     }
 
 	
