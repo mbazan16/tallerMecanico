@@ -35,7 +35,7 @@
                     <div class="table-container">
                         <table th:action="@{/trabajosHoy}" class="table table-bordered">
                             <thead>
-                                <tr>
+                                <tr th:each="trabajosHoy : ${trabajosHoy}">
                                     <th>Fecha</th>
                                     <th>Matrícula</th>
                                     <th>Tipo de Trabajo</th>
@@ -44,9 +44,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
+                                    <td th:text="${trabajosHoy.coche}">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo >xxx</td>
                                     <td>xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr>
