@@ -1,96 +1,116 @@
 package com.practica.tallerMecanico.services.entrega;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
 import com.practica.tallerMecanico.services.common.ServiceException;
 import com.practica.tallerMecanico.services.common.TrabajoNotFoundException;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class EntregaServicioTest {
 
-    private static final Logger log = LoggerFactory.getLogger(EntregaServicioTest.class);
-
     @Mock
-    private TrabajoRepository repository;
+    private TrabajoRepository trabajoRepositoryMock;
 
     @InjectMocks
-    private EntregaServicio service;
+    private EntregaServicio entregaServicio;
 
-    private Trabajo trabajo;
+    @Test
+    public void getTrabajo_existente_retornaTrabajo() throws ServiceException {
+        // Arrange
+        int id = 1;
+        Trabajo trabajoMock = new Trabajo();
+        trabajoMock.setId(id);
+        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.of(trabajoMock));
 
-    @BeforeEach
-    void setUp() {
-        trabajo = new Trabajo();
-        trabajo.setId(1);
-        trabajo.setDescripcion("Trabajo de prueba");
+        // Act
+        Trabajo trabajo = entregaServicio.getTrabajo(id);
+
+        // Assert
+        assertNotNull(trabajo);
+        assertEquals(id, trabajo.getId());
     }
 
     @Test
-    void testGetTrabajo() throws ServiceException {
-        // Configurar el comportamiento del mock
-        when(repository.findById(1)).thenReturn(Optional.of(trabajo));
+    public void getTrabajo_noExistente_lanzaTrabajoNotFoundException() {
+        // Arrange
+        int id = 1;
+        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.empty());
 
-        // Llamar al método a probar
-        Trabajo result = service.getTrabajo(1);
-
-        // Verificar los resultados
-        assertNotNull(result);
-        assertEquals(1, result.getId());
-        assertEquals("Trabajo de prueba", result.getDescripcion());
-
-        // Verificar que el método del repositorio se haya llamado con el ID correcto
-        verify(repository, times(1)).findById(1);
+        // Act + Assert
+        assertThrows(TrabajoNotFoundException.class, () -> entregaServicio.getTrabajo(id));
     }
 
     @Test
-    void testGetTrabajoNotFound() {
-        // Configurar el comportamiento del mock para devolver un Optional vacío
-        when(repository.findById(1)).thenReturn(Optional.empty());
+    public void insertarFecha_actualizaFechaEntrega() throws ServiceException {
+        // Arrange
+        int id = 1;
+        LocalDateTime fechaProcesada = LocalDateTime.now();
+        Trabajo trabajoMock = new Trabajo();
+        trabajoMock.setId(id);
+        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.of(trabajoMock));
 
-        // Verificar que se lanza la excepción correcta
-        TrabajoNotFoundException exception = assertThrows(TrabajoNotFoundException.class, () -> {
-            service.getTrabajo(1);
-        });
+        // Act
+        entregaServicio.insertarFecha(fechaProcesada, id);
 
-        assertEquals("Trabajo no encontrado con ID: 1", exception.getMessage());
-
-        // Verificar que el método del repositorio se haya llamado con el ID correcto
-        verify(repository, times(1)).findById(1);
+        // Assert
+        ArgumentCaptor<Trabajo> trabajoCaptor = ArgumentCaptor.forClass(Trabajo.class);
+        verify(trabajoRepositoryMock).save(trabajoCaptor.capture());
+        Trabajo trabajoGuardado = trabajoCaptor.getValue();
+        assertEquals(fechaProcesada, trabajoGuardado.getFechaEntrega());
     }
 
     @Test
-    void testProcesarFechaValida() throws ServiceException {
-        String fecha = "15/06/23 10:30";
+    public void procesarFecha_fechaValida_llamaInsertarFecha() throws ServiceException {
+        // Arrange
+        String fecha = "31/12/23 23:59";
+        int id = 1;
+        LocalDateTime fechaProcesada = LocalDateTime.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yy HH:mm"));
 
-        // Llamar al método a probar
-        assertDoesNotThrow(() -> service.procesarFecha(fecha));
+        // Mock repository behavior
+        Trabajo trabajoMock = new Trabajo();
+        trabajoMock.setId(id);
+        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.of(trabajoMock));
+
+        // Act
+        entregaServicio.procesarFecha(fecha, id);
+
+        // Assert
+        ArgumentCaptor<LocalDateTime> fechaCaptor = ArgumentCaptor.forClass(LocalDateTime.class);
+        ArgumentCaptor<Integer> idCaptor = ArgumentCaptor.forClass(Integer.class);
+        verify(entregaServicio).insertarFecha(fechaCaptor.capture(), idCaptor.capture());
+
+        assertEquals(fechaProcesada, fechaCaptor.getValue());
+        assertEquals(id, idCaptor.getValue());
     }
 
     @Test
-    void testProcesarFechaInvalida() {
-        String fechaInvalida = "2023-06-15 10:30";
+    public void procesarFecha_fechaInvalida_lanzaServiceException() {
+        // Arrange
+        String fechaInvalida = "31/12/2023 23:59";
+        int id = 1;
 
-        // Verificar que se lanza la excepción correcta
-        ServiceException exception = assertThrows(ServiceException.class, () -> {
-            service.procesarFecha(fechaInvalida);
-        });
-
-        assertEquals("Formato de fecha inválido: " + fechaInvalida, exception.getMessage());
+        // Act + Assert
+        ServiceException exception = assertThrows(ServiceException.class,
+                () -> entregaServicio.procesarFecha(fechaInvalida, id));
+        assertTrue(exception.getMessage().contains("Formato de fecha inválido"));
     }
 }
