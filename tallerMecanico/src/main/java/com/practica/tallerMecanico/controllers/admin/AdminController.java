@@ -28,7 +28,7 @@ public class AdminController {
 	@Autowired
 	EntregaRepository entregaRepository;
 
-	@GetMapping("/admin")
+	@GetMapping
 	public String mostrarPaginaAdministracion(Model model) {
 
 		List<Reserva> reservaPendiente = getReservaPendientes();
@@ -41,15 +41,15 @@ public class AdminController {
 		return "admin";
 	}
 
-	@GetMapping("/admin")
-	public List<Reserva> getReservaPendientes() {
+	
+	private List<Reserva> getReservaPendientes() {
 		List<Reserva> reservas = new ArrayList<>();
 
 		return reservas;
 	}
 	
-	@GetMapping("/admin")
-	public List<Entrega> getEntregaPendientes() {
+	
+	private List<Entrega> getEntregaPendientes() {
 		List<Entrega> entregas = new ArrayList<>();
 		return entregas;
 	}
