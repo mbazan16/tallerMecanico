@@ -3,7 +3,7 @@ package com.practica.tallerMecanico.services.reserva;
 import java.util.List;
 
 import com.practica.tallerMecanico.entities.Reserva;
-import com.practica.tallerMecanico.services.common.ReservaException;
+import com.practica.tallerMecanico.services.reserva.exception.ReservaException;
 
 public interface IReservasServicio{
 	

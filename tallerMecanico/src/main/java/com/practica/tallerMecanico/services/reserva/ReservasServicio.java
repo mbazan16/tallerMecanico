@@ -10,7 +10,7 @@ import com.practica.tallerMecanico.entities.Reserva;
 import com.practica.tallerMecanico.repositories.ReservaRepository;
 import com.practica.tallerMecanico.services.common.ErrorCode;
 import com.practica.tallerMecanico.services.common.MessageError;
-import com.practica.tallerMecanico.services.common.ReservaException;
+import com.practica.tallerMecanico.services.reserva.exception.ReservaException;
 
 import lombok.extern.slf4j.Slf4j;
 
