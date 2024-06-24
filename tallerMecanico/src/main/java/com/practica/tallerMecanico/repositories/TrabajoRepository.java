@@ -48,14 +48,14 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Integer> {
     // Nuevas querys 24/06/2024
     
   
-    @Query("SELECT t FROM Trabajo t WHERE t.cocheId = :cocheId AND t.fechaInicio = :fechaInicio")
+    @Query("SELECT t FROM Trabajo t WHERE t.coche.id = :cocheId AND t.fechaInicio = :fechaInicio")
     List<Trabajo> findAllByCocheIdAndFechaInicio(@Param("cocheId") Long cocheId, @Param("fechaInicio") LocalDate fechaInicio); // Busqueda por fecha de inicio FechaInicio CocheId.FindAllByCocheIdAndFechaInicio 
 
     @Query("SELECT t FROM Trabajo t WHERE t.coche.id = :cocheId")
     List<Trabajo> findAllByCocheId(@Param("cocheId") Long cocheId); // CocheId findAllByCocheId
     
-    @Query("SELECT t FROM Trabajo t WHERE t.coche.id = :cocheId AND t.coche.tipo = :tipo")
-    List<Trabajo> findAllByCocheIdAndCocheTipo(@Param("cocheId") Long cocheId, @Param("tipo") String tipo); // Tipo FindAllByCocheIDTipo
+    @Query("SELECT t FROM Trabajo t WHERE t.coche.id = :cocheId AND t.tipo.id = :tipoId")
+    List<Trabajo> findAllByCocheIdAndCocheTipo(@Param("cocheId") Long cocheId, @Param("tipo") Integer tipoId); // Tipo FindAllByCocheIDTipo
      
 }
 
