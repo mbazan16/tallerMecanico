@@ -43,7 +43,7 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Integer> {
     @Query("select t from Trabajo t where t.cliente.id= :id order by t.fechaInicio desc, t.prioridad")
     List<Trabajo> findAllByCliente(@Param("id")Long idCliente); //Trabajos por cliente
 
-    
+
     // Nuevas querys 24/06/2024 
     @Query("select t from Trabajo t where t.cocheId = :cocheId and t.fechaInicio = :fechaInicio")
     List<Trabajo> findAllByCocheIdAndFechaInicio(@Param("cocheId") Long cocheId, @Param("fechaInicio") LocalDate fechaInicio); // Busqueda por fecha de inicio FechaInicio CocheId.FindAllByCocheIdAndFechaInicio 
@@ -53,6 +53,12 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Integer> {
     
     @Query("select t from Trabajo t where t.coche.id = :cocheId and t.coche.tipo = :tipo")
     List<Trabajo> findAllByCocheIdAndCocheTipo(@Param("cocheId") Long cocheId, @Param("tipo") String tipo); // Tipo FindAllByCocheIDTipo
+    
+    @Query("select t from Trabajo t where t.tipo= :tipo")
+    List<Trabajo> findAllByTipo(String tipo); 
+    
+    @Query ("select t from Trabajo t where t.fechaInicio= :fechaInicio")
+    List<Trabajo> findAllByFechaInicio(LocalDate fechaInicio);
      
 }
 
