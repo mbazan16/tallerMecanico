@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practica.tallerMecanico.entities.Pieza;
+import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.services.pieza.PiezasServicio;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,10 @@ public class PiezasController {
         log.info("listarPiezas");
 
         List<Pieza> listaPiezas = servicio.listarPiezas(codigo,nombre);
+        List<Trabajo> trabajosEnEjecucion = servicio.listarTrabajosEnEjecucion();
         
         model.addAttribute("piezas", listaPiezas); 
+        model.addAttribute("trabajosEnEjecucion", trabajosEnEjecucion);
         
         return "piezas"; 
     }
