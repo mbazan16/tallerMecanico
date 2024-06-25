@@ -24,14 +24,17 @@ public class PiezasController {
 	
 	
 	@GetMapping("/piezas")
-	public String listarPiezas(Model model,@RequestParam(required = false) String codigo,@RequestParam(required = false) String nombre) {
+	public String listarPiezas(Model model,@RequestParam(required = false) String codigo,@RequestParam(required = false) String nombre,
+								@RequestParam(required = false) String matricula) {
         log.info("listarPiezas");
 
         List<Pieza> listaPiezas = servicio.listarPiezas(codigo,nombre);
-        List<Trabajo> trabajosEnEjecucion = servicio.listarTrabajosEnEjecucion();
+        List<Trabajo> trabajosEnEjecucion = servicio.listarTrabajosEnEjecucion(matricula);
         
         model.addAttribute("piezas", listaPiezas); 
         model.addAttribute("trabajosEnEjecucion", trabajosEnEjecucion);
+        
+        
         
         return "piezas"; 
     }

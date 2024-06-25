@@ -20,23 +20,26 @@ public class PiezasServicio implements IPiezas{
 	
 	@Autowired
     private TrabajoRepository trabajoRepository;
-	
+
 	@Override
     public List<Pieza> listarPiezas(String codigo,String nombre) {
 		List<Pieza> piezas = new ArrayList<Pieza>();
-		if(codigo != null && !codigo.trim().isEmpty())
+		if(codigo != null && !codigo.trim().isEmpty()) {
 			piezas =piezaRepository.findAllByCodigo(codigo);
-		else if(nombre != null && !nombre.trim().isEmpty())
+		}else if(nombre != null && !nombre.trim().isEmpty()) {
 			piezas =piezaRepository.findAllByNombre(nombre);
-		else piezas = piezaRepository.findAll();
-		
-		
+		}else {
+			piezas = piezaRepository.findAll();
+		}
+
         return piezas;
     }
 	
-	public List<Trabajo> listarTrabajosEnEjecucion() {
-        return trabajoRepository.findAllByEstado(EstadoTrabajo.EJECUCION);
+	public List<Trabajo> listarTrabajosEnEjecucion(String matricula) {
+        List<Trabajo> trabajosEnEjecucion = new ArrayList<Trabajo>();
+        
+        trabajosEnEjecucion = trabajoRepository.findAllByEstadoAndMatricula(EstadoTrabajo.EJECUCION, matricula);
+        			
+        return trabajosEnEjecucion;
     }
-	
-
 }
