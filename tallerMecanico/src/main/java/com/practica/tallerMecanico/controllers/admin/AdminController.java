@@ -13,7 +13,11 @@ import com.practica.tallerMecanico.entities.Entrega;
 import com.practica.tallerMecanico.entities.Reserva;
 import com.practica.tallerMecanico.repositories.EntregaRepository;
 import com.practica.tallerMecanico.repositories.ReservaRepository;
+import com.practica.tallerMecanico.services.admin.EntregaServicio;
+import com.practica.tallerMecanico.services.admin.ReservaServicio;
+import com.practica.tallerMecanico.services.common.ServiceException;
 import com.practica.tallerMecanico.services.reserva.IReservasServicio;
+import com.practica.tallerMecanico.services.reserva.exception.ReservaException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,13 +27,13 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 
 	@Autowired
-	IReservasServicio reservaS;
+	ReservaServicio reservaServicio;
 
 	@Autowired
-	EntregaRepository entregaRepository;
+	EntregaServicio entregaServicio;
 
 	@GetMapping
-	public String mostrarPaginaAdministracion(Model model) {
+	public String mostrarPaginaAdministracion(Model model) throws ServiceException {
 
 		List<Reserva> reservaPendiente = getReservaPendientes();
 
@@ -42,15 +46,16 @@ public class AdminController {
 	}
 
 	
-	private List<Reserva> getReservaPendientes() {
+	private List<Reserva> getReservaPendientes() throws ServiceException {
 		List<Reserva> reservas = new ArrayList<>();
-
+		reservas = reservaServicio.getPendientes();
 		return reservas;
 	}
 	
 	
-	private List<Entrega> getEntregaPendientes() {
+	private List<Entrega> getEntregaPendientes() throws ServiceException {
 		List<Entrega> entregas = new ArrayList<>();
+		entregas = entregaServicio.getPendientes();
 		return entregas;
 	}
 	
