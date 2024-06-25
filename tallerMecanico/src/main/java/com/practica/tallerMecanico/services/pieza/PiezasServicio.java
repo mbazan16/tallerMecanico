@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.practica.tallerMecanico.common.EstadoTrabajo;
 import com.practica.tallerMecanico.entities.Pieza;
+import com.practica.tallerMecanico.entities.PiezasTrabajo;
 import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.PiezaRepository;
+import com.practica.tallerMecanico.repositories.PiezasTrabajoRepository;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
 
 @Service
@@ -20,6 +22,9 @@ public class PiezasServicio implements IPiezas{
 	
 	@Autowired
     private TrabajoRepository trabajoRepository;
+	
+	@Autowired
+    private PiezasTrabajoRepository pieTraRepository;
 
 	@Override
     public List<Pieza> listarPiezas(String codigo,String nombre) {
@@ -38,8 +43,29 @@ public class PiezasServicio implements IPiezas{
 	public List<Trabajo> listarTrabajosEnEjecucion(String matricula) {
         List<Trabajo> trabajosEnEjecucion = new ArrayList<Trabajo>();
         
-        trabajosEnEjecucion = trabajoRepository.findAllByEstadoAndMatricula(EstadoTrabajo.EJECUCION, matricula);
-        			
+        if(matricula != null && !matricula.trim().isEmpty()) {
+        	trabajosEnEjecucion = trabajoRepository.findAllByEstadoAndMatricula(EstadoTrabajo.EJECUCION, matricula);
+        }		
         return trabajosEnEjecucion;
     }
+	
+	public void agregarPiezas(Trabajo trabajo, Pieza pieza, Integer cantidad) {
+		
+		// CAMBIAR LAS EXCEPCIONES
+//		if (trabajo == null) {
+//            throw new IllegalArgumentException("El trabajo no puede ser nulo.");
+//        }
+//
+//        if (pieza == null) {
+//            throw new IllegalArgumentException("La pieza no puede ser nula.");
+//        }
+        
+        PiezasTrabajo nuevaRelacion = new PiezasTrabajo();
+        nuevaRelacion.setPieza(pieza);
+        nuevaRelacion.setTrabajo(trabajo);
+        nuevaRelacion.setCantidad(cantidad);
+
+        pieTraRepository.save(nuevaRelacion);
+		 
+	}
 }
