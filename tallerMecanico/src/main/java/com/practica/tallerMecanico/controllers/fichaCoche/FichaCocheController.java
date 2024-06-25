@@ -34,14 +34,6 @@ public class FichaCocheController {
 		return "fichaCoche";
 	}
 	
-	@GetMapping("/fichaCoche/{telefono}")
-	public String clienteByTelefono(@PathVariable(name="telefono") String telefono, Model model, RedirectAttributes redirectAttributes) {
-		
-		Cliente cliente = fichaCocheServicio.getClientesByTel(telefono);
-		
-		model.addAttribute("cliente", cliente);
-		
-		return "fichaCoche";
-	}
+
 	
 }

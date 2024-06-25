@@ -38,13 +38,6 @@ public class FichaCocheServicio implements IFichaCoche {
 		return clientes; 
 	}
 	
-	//GET Clientes By Teléfono	
-	public Cliente getClientesByTel(String telefono){
-		
-		Cliente cliente = clienteRepository.findByTelefono(telefono);
-		
-		return cliente;
-	}
 
 	// Historico Trabajadores
 
