@@ -45,29 +45,31 @@ public class ReservasServicio implements IReservasServicio{
 		
 		Reserva reservaExistente = null;
 		Optional<Reserva> reservaOpcional = repository.findById(reservaMod.getId());
-		if(reservaOpcional.isPresent()) {
-			reservaExistente = reservaOpcional.get();
-			reservaExistente.setFechaEntrega(reservaMod.getFechaEntrega());
-			reservaExistente.setFechaProgramacion(reservaMod.getFechaEntrega());
-//			reservaExistente.setTipoTrabajo(reservaMod.getTipoTrabajo());
-			reservaExistente.setPrioridad(reservaMod.getPrioridad());
-		}
+		if(!reservaOpcional.isPresent()) {
+			//mensaje error no se encontro la reserva
+		} 
+		reservaExistente = reservaOpcional.get();
+		reservaExistente.setFechaEntrega(reservaMod.getFechaEntrega());
+		reservaExistente.setFechaProgramacion(reservaMod.getFechaEntrega());
+//		reservaExistente.setTipoTrabajo(reservaMod.getTipoTrabajo());
+		reservaExistente.setPrioridad(reservaMod.getPrioridad());
 		return repository.save(reservaExistente);
 	}
 	
-	public Reserva anularReserva(Reserva reservaAnulada) {
+	public Reserva anularReserva(Reserva reservaAnular) {
 		log.info("[anularReserva]");
-		log.debug("[reservaAnulada: "+reservaAnulada.toString()+"]");
+		log.debug("[reservaAnulada: "+reservaAnular.toString()+"]");
 		
 		Reserva reservaExistente = null;
-		Optional<Reserva> reservaOpcional = repository.findById(reservaAnulada.getId());
-		if(reservaOpcional.isPresent()) {
-			reservaExistente = reservaOpcional.get();
-		if(ReservaEstado.PENDIENTE.equals(reservaExistente.getReservaEstado()))
-			reservaExistente.setReservaEstado(ReservaEstado.ANULADA);
-		} else {
-			//mensaje error: la reserva ya esta anulada o ejecutada
+		Optional<Reserva> reservaOpcional = repository.findById(reservaAnular.getId());
+		if(!reservaOpcional.isPresent()) {
+			//mensaje error no se encontro la reserva
+			}
+		reservaExistente = reservaOpcional.get();
+		if(!ReservaEstado.PENDIENTE.equals(reservaExistente.getReservaEstado())) {
+			//mensaje error la reserva ya esta anulada o ejecutada
 		}
+		reservaExistente.setReservaEstado(ReservaEstado.ANULADA);
 		return reservaExistente;
 	}
 	
@@ -98,6 +100,8 @@ public class ReservasServicio implements IReservasServicio{
 			}else {
 				//reservas = repository.findByMatricula(); findAllByCocheMatricula
 			}//hay que cambiar el flujo para buscar tambien por fecha y estado 
+			
+			
 			
 			if(reservas.isEmpty()) throw new ReservaException(/*Error de sin elementos*/ErrorCode.EC_EXCEPCION_GENERAL);
 		} catch(ReservaException re) {

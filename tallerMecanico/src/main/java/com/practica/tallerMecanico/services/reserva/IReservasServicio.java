@@ -18,4 +18,5 @@ public interface IReservasServicio{
 	
 	public List<Reserva> buscar(Date fecha, ReservaEstado estado, String matricula, String telefono);
 	
+	//ver reserva para mostrar los datos de una reserva de la lista en la pantalla de mod/anular
 }
