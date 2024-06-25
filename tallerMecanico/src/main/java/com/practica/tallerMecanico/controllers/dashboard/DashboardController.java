@@ -26,16 +26,16 @@ public class DashboardController {
 	    
 	    //Servicio trabajos para hoy
 	    @GetMapping
-	    public String tablaTrabajosHoy(Model model) throws ServiceException {
+	    public String showDashboard(Model model) throws ServiceException {
 	    	//Lista trabajos hoy
 	        List<Trabajo> trabajosHoy = dashboardServicio.getTrabajosHoy(LocalDate.now());
 	        model.addAttribute("trabajosHoy", trabajosHoy);	
-	        //Lista trabajos pendientes
-	        List<Trabajo> trabajosPendientes = dashboardServicio.getTrabajosPendientes();
-	        model.addAttribute("trabajosPendientes", trabajosPendientes);	
 	        //Lista trabajos en ejecucion
-	        List<Trabajo> trabajosEjecucion = dashboardServicio.getTrabajosEjecucion();
-	        model.addAttribute("trabajosEjecucion", trabajosEjecucion);
+	        List<Trabajo> ejecucion = dashboardServicio.getTrabajosEjecucion();
+	        model.addAttribute("ejecucion", ejecucion);
+	        //Lista trabajos pendientes
+	        List<Trabajo> pendientes = dashboardServicio.getTrabajosPendientes();
+	        model.addAttribute("pendientes", pendientes);	
 	        //Buscador
 	        List<Trabajo> buscadorXMatricula = dashboardServicio.buscador(matricula);
 	        model.addAttribute("buscadorXMatricula", buscadorXMatricula );
