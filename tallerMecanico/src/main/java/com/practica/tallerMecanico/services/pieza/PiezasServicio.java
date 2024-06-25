@@ -1,5 +1,7 @@
 package com.practica.tallerMecanico.services.pieza;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,10 @@ import com.practica.tallerMecanico.repositories.PiezasTrabajoRepository;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
 
 @Service
+
 public class PiezasServicio implements IPiezas{
+
+
 	
 	@Autowired
 	private PiezaRepository piezaRepository;
@@ -63,7 +68,7 @@ public class PiezasServicio implements IPiezas{
         PiezasTrabajo nuevaRelacion = new PiezasTrabajo();
         nuevaRelacion.setPieza(pieza);
         nuevaRelacion.setTrabajo(trabajo);
-        nuevaRelacion.setCantidad(cantidad);
+        nuevaRelacion.setCantidad(cantidad);        
 
         pieTraRepository.save(nuevaRelacion);
 		 

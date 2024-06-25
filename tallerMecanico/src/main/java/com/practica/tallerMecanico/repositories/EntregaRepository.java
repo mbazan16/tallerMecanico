@@ -18,4 +18,5 @@ public interface EntregaRepository extends JpaRepository<Entrega, Integer> {
     List<Entrega> findAllByCoche(Coche coche);
 
     List<Entrega> findAllByCliente(Cliente cliente);
+
 }

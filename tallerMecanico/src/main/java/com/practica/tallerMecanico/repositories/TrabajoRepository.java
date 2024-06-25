@@ -60,6 +60,7 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Integer> {
     @Query ("select t from Trabajo t where t.fechaInicio= :fechaInicio")
     List<Trabajo> findAllByFechaInicio(LocalDate fechaInicio);
      
+
 }
 
 

@@ -1,14 +1,13 @@
 package com.practica.tallerMecanico.entities;
 
-import java.time.LocalDateTime; 
+import java.time.LocalDateTime;
+
+import com.practica.tallerMecanico.common.ReservaEstado;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,23 +16,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Entrega {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
     private LocalDateTime fechaRecogida;
 
-    private String observaciones;
+	private String tipo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coche_id")
-    private Coche coche;
+	private Integer idCoche;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
+	private Integer idCliente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "trabajo_id")
-    private Trabajo trabajo;
+	private Integer idTrabajo;
+	
+	private ReservaEstado reservaestado;
+
 }

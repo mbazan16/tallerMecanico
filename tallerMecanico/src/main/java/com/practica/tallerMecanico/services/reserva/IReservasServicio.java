@@ -6,9 +6,6 @@ import java.util.List;
 import com.practica.tallerMecanico.common.ReservaEstado;
 import com.practica.tallerMecanico.entities.Reserva;
 
-import com.practica.tallerMecanico.services.reserva.exception.ReservaException;
-
-
 public interface IReservasServicio{
 	
 	public Reserva crearReserva(Reserva reserva);
@@ -21,4 +18,5 @@ public interface IReservasServicio{
 	
 	public List<Reserva> buscar(Date fecha, ReservaEstado estado, String matricula, String telefono);
 	
+	//ver reserva para mostrar los datos de una reserva de la lista en la pantalla de mod/anular
 }

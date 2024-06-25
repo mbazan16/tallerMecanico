@@ -2,7 +2,6 @@ package com.practica.tallerMecanico.services.dashboard;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,12 +16,15 @@ import com.practica.tallerMecanico.services.common.MessageError;
 import com.practica.tallerMecanico.services.common.ServiceException;
 
 @Service
-public class DashboardServicio implements IDashboard {
 
-    private static final Logger log = LoggerFactory.getLogger(DashboardServicio.class);
+public class DashboardServicio implements IDashboard{
+	//Trazas
+		public static final Logger log = LoggerFactory.getLogger(Trabajo.class);
+	@Autowired
+	private TrabajoRepository trabajoRepository;
+	
+	LocalDate fechaHoy = LocalDate.now();
 
-    @Autowired
-    private TrabajoRepository trabajoRepository;
     
     //SERVICIO 1: Obtener un listado de trabajos programados para hoy
 
@@ -53,7 +55,11 @@ public class DashboardServicio implements IDashboard {
             log.error("Error al obtener trabajos pendientes", e);
             throw new ServiceException(MessageError.EC_EXCEPCION_GENERAL);
         }
+
+        return trabajoRepository.findAllByFechaEntregaBefore(fechaHoy);
+
     }
+
     
     //SERVICIO 3: Obtener un listado de trabajos en ejecución
 
@@ -131,6 +137,7 @@ public class DashboardServicio implements IDashboard {
             throw new ServiceException(MessageError.EC_EXCEPCION_GENERAL);
         }
     }
+
 
 }
 

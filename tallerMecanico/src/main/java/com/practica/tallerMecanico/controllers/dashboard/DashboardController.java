@@ -20,6 +20,7 @@ import com.practica.tallerMecanico.services.dashboard.DashboardServicio;
 @RequestMapping(value = {"/dashboard"})
 public class DashboardController {
 
+
     private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @Autowired
@@ -83,6 +84,7 @@ public class DashboardController {
         }
     }
 }
+
 
 
 

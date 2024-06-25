@@ -1,22 +1,25 @@
 package com.practica.tallerMecanico.services.entrega;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+=======
+>>>>>>> refs/heads/reservas
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
 import com.practica.tallerMecanico.common.EstadoTrabajo;
 import com.practica.tallerMecanico.entities.Entrega;
+=======
+>>>>>>> refs/heads/reservas
 import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.EntregaRepository;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
-import com.practica.tallerMecanico.services.common.ServiceException;
-import com.practica.tallerMecanico.services.common.TrabajoNotFoundException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,12 +34,17 @@ public class EntregaServicio implements IEntregaServicio {
 	EntregaRepository entregaRepository;
 	
 	
-	public Trabajo getTrabajo(Integer id) throws ServiceException {
+	public Trabajo getTrabajo(Integer id) {
 		log.info("[getTrabajo]");
 		log.debug("[Trabajo ID: "+id+"]");
+<<<<<<< HEAD
 		return trabajoRepository.findById(id)
                 .orElseThrow(() -> new TrabajoNotFoundException("Trabajo no encontrado con ID: " + id));
+=======
+		return repository.findById(id).get();
+>>>>>>> refs/heads/reservas
 	}
+<<<<<<< HEAD
 	
 	public void procesarFecha(String fecha, String hora ,int id) throws ServiceException {
         log.info("[procesarFecha]");
@@ -76,4 +84,6 @@ public class EntregaServicio implements IEntregaServicio {
 
 
 	
+=======
+>>>>>>> refs/heads/reservas
 }

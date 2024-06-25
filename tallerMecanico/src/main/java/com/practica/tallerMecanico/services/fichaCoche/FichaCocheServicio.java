@@ -1,11 +1,12 @@
 package com.practica.tallerMecanico.services.fichaCoche;
 
+
+
 import java.time.LocalDate;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.practica.tallerMecanico.entities.Cliente;
 import com.practica.tallerMecanico.entities.Coche;
@@ -13,30 +14,44 @@ import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.ClienteRepository;
 import com.practica.tallerMecanico.repositories.CocheRepository;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
-import com.practica.tallerMecanico.services.common.FichaCocheException;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
 public class FichaCocheServicio implements IFichaCoche {
 
-	Logger log = LoggerFactory.getLogger(FichaCocheServicio.class);
+
 
 	@Autowired
 	private CocheRepository cocheRepository; 
-	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteRepository clienteRepository; 
+	@Autowired
+	private TrabajoRepository trabajoRepository; 
 
-	@Autowired
-	private TrabajoRepository trabajoRepository;
-	
-	//GET COCHE BY ID
-	public Coche getCocheById(Long id){ //Añadir Excepciones
+
+	public List<Coche> getAllCoches() {
+		log.info("[getAllCoches]");
+
+		List<Coche> coches = cocheRepository.findAll();
+
+		coches.forEach(c -> log.debug(c.toString()));
+
 		
-		return cocheRepository.findById(id)
-				.orElseThrow(() -> new FichaCocheException("Coche no encontrado con ID: " + id));
+		return coches;
 	}
 
-	//GET CLIENTE BY COCHE ID
-	public List<Cliente> getClientesByCocheId(Long id){ //Añadir excepciones y test
+
+	public Coche getCocheById(Long id){
+		
+		
+		
+		return cocheRepository.findById(id).get();
+	}
+
+	public List<Cliente> getClientesByCocheId(Integer id){		
+
 
 	List<Cliente> clientes = clienteRepository.findAllByCocheId(id);
 	 
