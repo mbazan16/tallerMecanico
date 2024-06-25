@@ -1,11 +1,15 @@
 package com.practica.tallerMecanico.services.reserva;
 
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.practica.tallerMecanico.common.ReservaEstado;
 import com.practica.tallerMecanico.entities.Reserva;
 import com.practica.tallerMecanico.repositories.ReservaRepository;
 import com.practica.tallerMecanico.services.common.ErrorCode;
@@ -24,9 +28,10 @@ public class ReservasServicio implements IReservasServicio{
 	public Reserva crearReserva(Reserva reserva) {
 		log.info("[crearReserva]");
 		log.debug("[Reserva: "+reserva.toString()+"]");
+		//LocalDateTime fechaActual = LocalDateTime.now();
 		try {
-			//inicializar el estado de la reserva que recibo
-			
+			reserva.setReservaEstado(ReservaEstado.PENDIENTE);
+			//reserva.setFechaReserva((Date)fechaActual.now());
 			reserva = repository.save(reserva);
 		} catch(Exception e) {
 			log.error("Error al crear reserva", e);
@@ -34,52 +39,73 @@ public class ReservasServicio implements IReservasServicio{
 		return reserva;
 	}
 	
-	public void modificarReserva(Reserva reserva) {
+	public Reserva modificarReserva(Reserva reservaMod) {
 		log.info("[modificarReserva]");
-		log.debug("[Reserva: "+reserva.toString()+"]");
-		//comprobar que cambios se estan modificando y almacenarlos?
+		log.debug("[modificarReserva:"+reservaMod.toString()+"]");
+		
+		Reserva reservaExistente = null;
+		Optional<Reserva> reservaOpcional = repository.findById(reservaMod.getId());
+		if(reservaOpcional.isPresent()) {
+			reservaExistente = reservaOpcional.get();
+			reservaExistente.setFechaEntrega(reservaMod.getFechaEntrega());
+			reservaExistente.setFechaProgramacion(reservaMod.getFechaEntrega());
+//			reservaExistente.setTipoTrabajo(reservaMod.getTipoTrabajo());
+			reservaExistente.setPrioridad(reservaMod.getPrioridad());
+		}
+		return repository.save(reservaExistente);
 	}
 	
-	public void anularReserva(Reserva reserva) {
+	public Reserva anularReserva(Reserva reservaAnulada) {
 		log.info("[anularReserva]");
-		log.debug("[Reserva: "+reserva.toString()+"]");
-		//modificar estado reserva a anulada y almacenarla?
+		log.debug("[reservaAnulada: "+reservaAnulada.toString()+"]");
+		
+		Reserva reservaExistente = null;
+		Optional<Reserva> reservaOpcional = repository.findById(reservaAnulada.getId());
+		if(reservaOpcional.isPresent()) {
+			reservaExistente = reservaOpcional.get();
+		if(ReservaEstado.PENDIENTE.equals(reservaExistente.getReservaEstado()))
+			reservaExistente.setReservaEstado(ReservaEstado.ANULADA);
+		} else {
+			//mensaje error: la reserva ya esta anulada o ejecutada
+		}
+		return reservaExistente;
 	}
 	
-	public List<Reserva> listarReservas(Reserva reserva) throws ReservaException {
+	public List<Reserva> listarReservas() {
 		log.info("[listarReserva]");
-		log.debug("[Reserva: "+reserva.toString()+"]");
+		
 		List<Reserva> reservas = null;
 		try {
 			reservas = repository.findAll();
 			if(reservas.isEmpty()) throw new ReservaException(/*No es el correspondiente*/ErrorCode.EC_EXCEPCION_GENERAL);
 		} catch(ReservaException re) {
 			log.error(/*Mensaje sin elementos*/"Error sin elementos", re);
-			throw re;
+			//throw re;
 		} catch(Exception e) {
 			log.error(MessageError.EC_EXCEPCION_GENERAL, e);
-			throw new ReservaException(ErrorCode.EC_EXCEPCION_GENERAL);
+			//throw new ReservaException(ErrorCode.EC_EXCEPCION_GENERAL);
 		}
 		return reservas;
 	}
 
-	public List<Reserva> buscar(String matricula, String telefono) throws ReservaException {
+	public List<Reserva> buscar(Date fecha, ReservaEstado estado, String matricula, String telefono) {
 		log.info("[buscar]");
 		log.debug("[buscar: "+matricula+telefono+"]");
 		List<Reserva> reservas = null;
 		try {
 			if(matricula==null || matricula.equals("")) {
-				//reservas = repository.findByMatricula();
+				//reservas = repository.findByTelefono(); findAllByClienteTelefono
 			}else {
-				//reservas = repository.findByTelefono();
-			}
+				//reservas = repository.findByMatricula(); findAllByCocheMatricula
+			}//hay que cambiar el flujo para buscar tambien por fecha y estado 
+			
 			if(reservas.isEmpty()) throw new ReservaException(/*Error de sin elementos*/ErrorCode.EC_EXCEPCION_GENERAL);
 		} catch(ReservaException re) {
 			log.error(/*mensaje sin elementos*/"Error sin elementos", re);
-			throw re;
+			//throw re;
 		} catch(Exception e) {
 			log.error(MessageError.EC_EXCEPCION_GENERAL, e);
-			throw new ReservaException(ErrorCode.EC_EXCEPCION_GENERAL);
+			//throw new ReservaException(ErrorCode.EC_EXCEPCION_GENERAL);
 		}
 		return reservas;
 	}

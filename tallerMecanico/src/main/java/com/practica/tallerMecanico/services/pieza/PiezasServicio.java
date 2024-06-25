@@ -27,7 +27,7 @@ public class PiezasServicio implements IPiezas{
 		else piezas = piezaRepository.findAll();
 		
 		
-        return piezas
+        return piezas;
     }
 	
 
