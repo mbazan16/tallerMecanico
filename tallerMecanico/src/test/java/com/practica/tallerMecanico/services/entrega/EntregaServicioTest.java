@@ -1,116 +1,113 @@
 package com.practica.tallerMecanico.services.entrega;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
+import com.practica.tallerMecanico.entities.Cliente;
+import com.practica.tallerMecanico.entities.Coche;
+import com.practica.tallerMecanico.entities.Entrega;
 import com.practica.tallerMecanico.entities.Trabajo;
+import com.practica.tallerMecanico.repositories.EntregaRepository;
 import com.practica.tallerMecanico.repositories.TrabajoRepository;
 import com.practica.tallerMecanico.services.common.ServiceException;
 import com.practica.tallerMecanico.services.common.TrabajoNotFoundException;
 
-@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class EntregaServicioTest {
 
     @Mock
-    private TrabajoRepository trabajoRepositoryMock;
+    private TrabajoRepository trabajoRepository;
+
+    @Mock
+    private EntregaRepository entregaRepository;
 
     @InjectMocks
     private EntregaServicio entregaServicio;
 
     @Test
-    public void getTrabajo_existente_retornaTrabajo() throws ServiceException {
+    public void testGetTrabajo_TrabajoEncontrado() throws ServiceException {
         // Arrange
-        int id = 1;
+        int idTrabajo = 1;
         Trabajo trabajoMock = new Trabajo();
-        trabajoMock.setId(id);
-        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.of(trabajoMock));
+        trabajoMock.setId(idTrabajo);
+
+        when(trabajoRepository.findById(idTrabajo)).thenReturn(Optional.of(trabajoMock));
 
         // Act
-        Trabajo trabajo = entregaServicio.getTrabajo(id);
+        Trabajo trabajoObtenido = entregaServicio.getTrabajo(idTrabajo);
 
         // Assert
-        assertNotNull(trabajo);
-        assertEquals(id, trabajo.getId());
+        assertThat(trabajoObtenido).isEqualTo(trabajoMock);
+        verify(trabajoRepository).findById(idTrabajo);
     }
 
     @Test
-    public void getTrabajo_noExistente_lanzaTrabajoNotFoundException() {
+    public void testGetTrabajo_TrabajoNoEncontrado() throws ServiceException {
         // Arrange
-        int id = 1;
-        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.empty());
+        int idTrabajo = 1;
 
-        // Act + Assert
-        assertThrows(TrabajoNotFoundException.class, () -> entregaServicio.getTrabajo(id));
+        when(trabajoRepository.findById(idTrabajo)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(TrabajoNotFoundException.class, () -> entregaServicio.getTrabajo(idTrabajo));
+        verify(trabajoRepository).findById(idTrabajo);
     }
 
     @Test
-    public void insertarFecha_actualizaFechaEntrega() throws ServiceException {
+    public void testProcesarFecha_FormatoValido() throws ServiceException {
         // Arrange
-        int id = 1;
-        LocalDateTime fechaProcesada = LocalDateTime.now();
+        int idTrabajo = 1;
+        String fecha = "25-06-2023";
+        String hora = "14:30";
+
+        // Creamos un trabajo simulado para devolverlo cuando se llame a findById
         Trabajo trabajoMock = new Trabajo();
-        trabajoMock.setId(id);
-        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.of(trabajoMock));
+        trabajoMock.setId(idTrabajo);
+        trabajoMock.setCoche(new Coche()); // Simulamos datos necesarios
+        trabajoMock.setCliente(new Cliente()); // Simulamos datos necesarios
+
+        when(trabajoRepository.findById(idTrabajo)).thenReturn(java.util.Optional.of(trabajoMock));
+        // Mock para el método save del repositorio de trabajo
+        when(trabajoRepository.save(any(Trabajo.class))).thenReturn(trabajoMock);
+        // Mock para el método save del repositorio de entrega
+        when(entregaRepository.save(any(Entrega.class))).thenReturn(new Entrega()); // Podemos devolver un objeto Entrega simulado
 
         // Act
-        entregaServicio.insertarFecha(fechaProcesada, id);
+        entregaServicio.procesarFecha(fecha, hora, idTrabajo);
 
         // Assert
-        ArgumentCaptor<Trabajo> trabajoCaptor = ArgumentCaptor.forClass(Trabajo.class);
-        verify(trabajoRepositoryMock).save(trabajoCaptor.capture());
-        Trabajo trabajoGuardado = trabajoCaptor.getValue();
-        assertEquals(fechaProcesada, trabajoGuardado.getFechaEntrega());
+        // Verificar que se llamó a findById del trabajoRepository
+        verify(trabajoRepository).findById(idTrabajo);
+        // Verificar que se llamó a save del trabajoRepository con el trabajo actualizado
+        verify(trabajoRepository).save(trabajoMock);
+        // Verificar que se llamó a save del entregaRepository al menos una vez
+        verify(entregaRepository).save(any(Entrega.class));
     }
 
     @Test
-    public void procesarFecha_fechaValida_llamaInsertarFecha() throws ServiceException {
+    public void testProcesarFecha_FormatoInvalido() {
         // Arrange
-        String fecha = "31/12/23 23:59";
-        int id = 1;
-        LocalDateTime fechaProcesada = LocalDateTime.parse(fecha, DateTimeFormatter.ofPattern("dd/MM/yy HH:mm"));
+        int idTrabajo = 1;
+        String fecha = "Le das y no va"; // Formato inválido
+        String hora = "14:30";
 
-        // Mock repository behavior
-        Trabajo trabajoMock = new Trabajo();
-        trabajoMock.setId(id);
-        when(trabajoRepositoryMock.findById(id)).thenReturn(java.util.Optional.of(trabajoMock));
-
-        // Act
-        entregaServicio.procesarFecha(fecha, id);
-
-        // Assert
-        ArgumentCaptor<LocalDateTime> fechaCaptor = ArgumentCaptor.forClass(LocalDateTime.class);
-        ArgumentCaptor<Integer> idCaptor = ArgumentCaptor.forClass(Integer.class);
-        verify(entregaServicio).insertarFecha(fechaCaptor.capture(), idCaptor.capture());
-
-        assertEquals(fechaProcesada, fechaCaptor.getValue());
-        assertEquals(id, idCaptor.getValue());
+        // Act & Assert
+        assertThatThrownBy(() -> entregaServicio.procesarFecha(fecha, hora, idTrabajo))
+                .isInstanceOf(ServiceException.class)
+                .hasMessageContaining("Formato de fecha inválido: " + fecha);
     }
 
-    @Test
-    public void procesarFecha_fechaInvalida_lanzaServiceException() {
-        // Arrange
-        String fechaInvalida = "31/12/2023 23:59";
-        int id = 1;
-
-        // Act + Assert
-        ServiceException exception = assertThrows(ServiceException.class,
-                () -> entregaServicio.procesarFecha(fechaInvalida, id));
-        assertTrue(exception.getMessage().contains("Formato de fecha inválido"));
-    }
 }

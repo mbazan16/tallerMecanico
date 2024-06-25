@@ -9,6 +9,6 @@ import com.practica.tallerMecanico.services.common.ServiceException;
 public interface IEntregaServicio {
 	
 	public Trabajo getTrabajo(Integer id) throws ServiceException;
-	public void procesarFecha(String fecha, int id) throws ServiceException;
-	public void insertarFecha(LocalDateTime fechaProcesada, int id) throws ServiceException;
+	public void procesarFecha(String fecha, String hora ,int id) throws ServiceException;
+	public void insertarEntrega(LocalDateTime fechaProcesada, int id) throws ServiceException;
 }
