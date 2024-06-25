@@ -1,5 +1,6 @@
 package com.practica.tallerMecanico.services.fichaCoche;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.practica.tallerMecanico.entities.Cliente;
 import com.practica.tallerMecanico.entities.Coche;
+import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.ClienteRepository;
 import com.practica.tallerMecanico.repositories.CocheRepository;
+import com.practica.tallerMecanico.repositories.TrabajoRepository;
 import com.practica.tallerMecanico.services.common.FichaCocheException;
 
 public class FichaCocheServicio implements IFichaCoche {
@@ -22,7 +25,9 @@ public class FichaCocheServicio implements IFichaCoche {
 	@Autowired
 	private ClienteRepository clienteRepository;
 
-
+	@Autowired
+	private TrabajoRepository trabajoRepository;
+	
 	//GET COCHE BY ID
 	public Coche getCocheById(Long id){ //Añadir Excepciones
 		
@@ -37,8 +42,31 @@ public class FichaCocheServicio implements IFichaCoche {
 	 
 		return clientes; 
 	}
-	
 
+	public List<Trabajo> getTrabajosByCocheId(Long id){
+		
+		List<Trabajo> trabajos= trabajoRepository.findAllByCocheId(id);
+		
+		return trabajos;
+		
+	}
+	
+	public List<Trabajo> getTrabajoByTipoTrabajo(String tipo, LocalDate fecha){
+		
+		List<Trabajo> trabajos;
+		
+		if(tipo != null && !tipo.trim().isEmpty())
+			trabajos= trabajoRepository.findAllByTipo(tipo);
+		else if(fecha!=null)
+			trabajos= trabajoRepository.findAllByFechaInicio(fecha);
+		else
+			trabajos= trabajoRepository.findAll();
+		return trabajos;
+	}
+
+	//MÉTODOS TRABAJOS
+	
+	
 	// Historico Trabajadores
 
 }
