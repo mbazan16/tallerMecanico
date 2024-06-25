@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,13 +99,15 @@ public class DashboardServicio implements IDashboard{
 		return trabajosEjecucion;
     }
 	//SERVICIO #6: Terminar Trabajo, dar el trabajo por concluido. En este punto se realizará el cálculo del coste total del trabajo, insertándolo en la base de datos.
-	public void cambiarTrabajoATerminado(Integer id){
+	public void cambiarTrabajoATerminado(Integer id) throws ServiceException{
 		Trabajo trabajo = trabajoRepository.findById(id).get();
 		if(id!=null) {
 		Trabajo trabajoTerminado = new Trabajo();
 		trabajoTerminado.setEstado(EstadoTrabajo.TERMINADO);
 		trabajoTerminado.setFechaFin(LocalDateTime.now());
 		trabajoRepository.save(trabajo);
+		} else {
+			throw new ServiceException(MessageError.EC_EXCEPCION_NO_ID);
 		}
 	}
 
