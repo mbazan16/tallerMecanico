@@ -80,15 +80,12 @@ public class DashboardServicio implements IDashboard{
 	public void cambiarEstadoTrabajo(Integer id){
 		Trabajo trabajo = trabajoRepository.findById(id).get();
 		if(id!=null) {
-		Trabajo trabajoOpt = new Trabajo();
-		trabajoOpt.setId(id);
-		trabajoOpt.setEstado(EstadoTrabajo.EJECUCION);
-		trabajoOpt.setFechaInicio(LocalDateTime.now());
+		Trabajo trabajoEstado = new Trabajo();
+		trabajoEstado .setEstado(EstadoTrabajo.EJECUCION);
+		trabajoEstado .setFechaInicio(LocalDateTime.now());
 		trabajoRepository.save(trabajo);
 		}
-
 	}
-	
 	
 	//SERVICIO #5: Listado de Trabajos en Ejecución
 	public List<Trabajo> getTrabajosEjecucion() throws ServiceException{
@@ -103,7 +100,15 @@ public class DashboardServicio implements IDashboard{
 		return trabajosEjecucion;
     }
 	//SERVICIO #6: Terminar Trabajo, dar el trabajo por concluido. En este punto se realizará el cálculo del coste total del trabajo, insertándolo en la base de datos.
-
+	public void cambiarTrabajoATerminado(Integer id){
+		Trabajo trabajo = trabajoRepository.findById(id).get();
+		if(id!=null) {
+		Trabajo trabajoTerminado = new Trabajo();
+		trabajoTerminado.setEstado(EstadoTrabajo.TERMINADO);
+		trabajoTerminado.setFechaFin(LocalDateTime.now());
+		trabajoRepository.save(trabajo);
+		}
+	}
 
 
 }

@@ -19,21 +19,31 @@ import com.practica.tallerMecanico.services.dashboard.DashboardServicio;
 public class DashboardController {
 
 	    @Autowired
-	    private DashboardServicio dashboardServicio;	    
+	    private DashboardServicio dashboardServicio;
+	    
+	    String matricula = new Trabajo().getCoche().getMatricula();
+	    
 	    
 	    //Servicio trabajos para hoy
 	    @GetMapping
 	    public String tablaTrabajosHoy(Model model) throws ServiceException {
+	    	//Lista trabajos hoy
 	        List<Trabajo> trabajosHoy = dashboardServicio.getTrabajosHoy(LocalDate.now());
 	        model.addAttribute("trabajosHoy", trabajosHoy);	
+	        //Lista trabajos pendientes
 	        List<Trabajo> trabajosPendientes = dashboardServicio.getTrabajosPendientes();
 	        model.addAttribute("trabajosPendientes", trabajosPendientes);	
+	        //Lista trabajos en ejecucion
 	        List<Trabajo> trabajosEjecucion = dashboardServicio.getTrabajosEjecucion();
-	        model.addAttribute("trabajosEjecucion", trabajosEjecucion);	
-			return "dashboard";		
-	    }
-	   
-	    
+	        model.addAttribute("trabajosEjecucion", trabajosEjecucion);
+	        //Buscador
+	        List<Trabajo> buscadorXMatricula = dashboardServicio.buscador(matricula);
+	        model.addAttribute("buscadorXMatricula", buscadorXMatricula );
+	        //Boton iniciar
+	        //Boton Terminar
+
+			return "dashboard";	        		
+	    }	   	    
 	}
 
 
