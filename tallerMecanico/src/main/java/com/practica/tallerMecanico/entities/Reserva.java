@@ -50,5 +50,5 @@ public class Reserva {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "trabajo_id")
-    private Trabajo trabajo;
+    private TipoTrabajo tipoTrabajo;
 }
