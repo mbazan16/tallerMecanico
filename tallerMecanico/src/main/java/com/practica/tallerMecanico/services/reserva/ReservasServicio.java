@@ -120,7 +120,7 @@ public class ReservasServicio implements IReservasServicio{
 
 	public List<Reserva> buscar(Date fecha, ReservaEstado estado, String matricula, String telefono) {
 		log.info("[buscar]");
-		log.debug("[buscar: "+fecha+estado+matricula+telefono+"]");
+		log.debug("[buscar: "+fecha+", "+estado+", "+matricula+", "+telefono+"]");
 		List<Reserva> reservas = null;
 		try {
 			if(fecha!=null){

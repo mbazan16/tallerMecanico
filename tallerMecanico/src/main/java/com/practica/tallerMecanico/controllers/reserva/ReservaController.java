@@ -71,7 +71,8 @@ public class ReservaController {
 
 	@GetMapping("/b")
 	public String buscarReservas(Model model,@RequestParam Date fecha,@RequestParam ReservaEstado estado,@RequestParam String matricula,@RequestParam String telefono){
-		log.info("[mostrarLista]");
+		log.info("[buscarReservas]");
+		log.debug("[buscarReservas: "+fecha+", "+estado+", "+matricula+", "+telefono+"]");
 		
 		List<Reserva> reservas = servicio.buscar(fecha, estado, matricula, telefono);
 		model.addAttribute("listaReservas", reservas);
