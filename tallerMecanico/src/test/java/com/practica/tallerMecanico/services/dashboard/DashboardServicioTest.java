@@ -1,5 +1,6 @@
 package com.practica.tallerMecanico.services.dashboard;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -11,10 +12,11 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 import com.practica.tallerMecanico.common.EstadoTrabajo;
 import com.practica.tallerMecanico.entities.Coche;
@@ -25,7 +27,8 @@ import com.practica.tallerMecanico.services.common.ServiceException;
 import java.util.List;
 import java.util.Optional;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@Rollback
 public class DashboardServicioTest {
 
     @Mock
@@ -57,7 +60,7 @@ public class DashboardServicioTest {
 
         List<Trabajo> trabajosHoy = dashboardServicio.getTrabajosHoy(LocalDate.now());
 
-        assert(!trabajosHoy.isEmpty());
+        assertEquals(1, trabajosHoy.size());
         verify(trabajoRepository).findAllByFProgramacion(any(LocalDate.class));
     }
 
@@ -84,11 +87,11 @@ public class DashboardServicioTest {
     }
 
     @Test
-    public void testCambiarEstadoTrabajo() {
+    public void testIniciarTrabajo() throws ServiceException {
         when(trabajoRepository.findById(any(Integer.class)))
             .thenReturn(Optional.of(trabajo));
 
-        dashboardServicio.cambiarEstadoTrabajo(1);
+        dashboardServicio.iniciarTrabajo(1);
 
         verify(trabajoRepository).findById(any(Integer.class));
         verify(trabajoRepository).save(any(Trabajo.class));
@@ -106,11 +109,11 @@ public class DashboardServicioTest {
     }
 
     @Test
-    public void testCambiarTrabajoATerminado() throws ServiceException {
+    public void testTerminarTrabajo() throws ServiceException {
         when(trabajoRepository.findById(any(Integer.class)))
             .thenReturn(Optional.of(trabajo));
 
-        dashboardServicio.cambiarTrabajoATerminado(1);
+        dashboardServicio.terminarTrabajo(1);
 
         verify(trabajoRepository).findById(any(Integer.class));
         verify(trabajoRepository).save(any(Trabajo.class));

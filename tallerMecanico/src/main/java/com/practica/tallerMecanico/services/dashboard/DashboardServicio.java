@@ -76,14 +76,12 @@ public class DashboardServicio implements IDashboard{
 
 	}
 	//SERVICIO #4: Iniciar Trabajo mediante el botón Iniciar para trabajos programados, para hoy o no.
-	public void cambiarEstadoTrabajo(Integer id){
-		Trabajo trabajo = trabajoRepository.findById(id).get();
-		if(id!=null) {
-		Trabajo trabajoEstado = new Trabajo();
-		trabajoEstado .setEstado(EstadoTrabajo.EJECUCION);
-		trabajoEstado .setFechaInicio(LocalDateTime.now());
+	public void iniciarTrabajo(Integer id) throws ServiceException{
+		if(id==null)throw new ServiceException(MessageError.EC_EXCEPCION_NO_ID);
+		Trabajo trabajo = trabajoRepository.findById(id).get();// TODO Auto-generated method stub
+		trabajo.setEstado(EstadoTrabajo.EJECUCION);
+		trabajo.setFechaInicio(LocalDateTime.now());
 		trabajoRepository.save(trabajo);
-		}
 	}
 	
 	//SERVICIO #5: Listado de Trabajos en Ejecución
@@ -99,17 +97,14 @@ public class DashboardServicio implements IDashboard{
 		return trabajosEjecucion;
     }
 	//SERVICIO #6: Terminar Trabajo, dar el trabajo por concluido. En este punto se realizará el cálculo del coste total del trabajo, insertándolo en la base de datos.
-	public void cambiarTrabajoATerminado(Integer id) throws ServiceException{
-		Trabajo trabajo = trabajoRepository.findById(id).get();
-		if(id!=null) {
-		Trabajo trabajoTerminado = new Trabajo();
-		trabajoTerminado.setEstado(EstadoTrabajo.TERMINADO);
-		trabajoTerminado.setFechaFin(LocalDateTime.now());
-		trabajoRepository.save(trabajo);
-		} else {
-			throw new ServiceException(MessageError.EC_EXCEPCION_NO_ID);
-		}
+		public void terminarTrabajo(Integer id) throws ServiceException{
+			if(id==null)throw new ServiceException(MessageError.EC_EXCEPCION_NO_ID);
+			Trabajo trabajo = trabajoRepository.findById(id).get();// TODO Auto-generated method stub
+			trabajo.setEstado(EstadoTrabajo.EJECUCION);
+			trabajo.setFechaInicio(LocalDateTime.now());
+			trabajoRepository.save(trabajo);
 	}
+
 
 
 }
