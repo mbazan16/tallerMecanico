@@ -10,11 +10,11 @@ import java.util.Date;
 
 public interface ReservaRepository extends JpaRepository<Reserva, Integer> {
 
-    List<Reserva> findAllByCoche(Coche coche);
+    List<Reserva> findAllByCocheMatricula(String matricula);
 
-    List<Reserva> findAllByCliente(Cliente cliente);
+    List<Reserva> findAllByCliente(String telefono);
 
     List<Reserva> findAllByReservaEstado(ReservaEstado reservaEstado);
 
-    List<Reserva> findByCocheAndFechaReserva(Coche coche, Date fechaReserva);
+    List<Reserva> findByFechaReserva( Date fechaReserva);
 }
