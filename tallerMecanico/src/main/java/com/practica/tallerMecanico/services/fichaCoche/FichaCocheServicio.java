@@ -1,9 +1,12 @@
 package com.practica.tallerMecanico.services.fichaCoche;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.practica.tallerMecanico.entities.Cliente;
 import com.practica.tallerMecanico.entities.Coche;
 import com.practica.tallerMecanico.repositories.ClienteRepository;
 import com.practica.tallerMecanico.repositories.CocheRepository;
@@ -27,15 +30,21 @@ public class FichaCocheServicio implements IFichaCoche {
 				.orElseThrow(() -> new FichaCocheException("Coche no encontrado con ID: " + id));
 	}
 
-//	//GET CLIENTE BY COCHE ID
-//	public List<Cliente> getClientesByCocheId(Long id){
-//		
-//	Optional<Coche> coche =	cocheRepository.findById(id);
-//
-////	Cliente cliente = clienteRepository.findByCoche(coche);
-//	
-//		return null; //cliente
-//	}
+	//GET CLIENTE BY COCHE ID
+	public List<Cliente> getClientesByCocheId(Long id){ //Añadir excepciones y test
+
+	List<Cliente> clientes = clienteRepository.findAllByCocheId(id);
+	 
+		return clientes; 
+	}
+	
+	//GET Clientes By Teléfono	
+	public Cliente getClientesByTel(String telefono){
+		
+		Cliente cliente = clienteRepository.findByTelefono(telefono);
+		
+		return cliente;
+	}
 
 	// Historico Trabajadores
 
