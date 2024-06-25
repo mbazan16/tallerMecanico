@@ -5,28 +5,50 @@
 </head>
 <body>
 	<div >
-	<h1 th:text="#{title.fichaTrabajo}></h1>
+	<h1 th:text="#{title.fichaTrabajo}"></h1>
 	<table >
 	<tr>
+	<td colspan="2" th:text="#{label.trabajo.estado}"></td>
+	<td colspan="2" th:text="${trabajo.estado}"></td>
 	</tr>
 	<tr>
+	<td colspan="2" th:text="${trabajo.cliente.nombre}"></td>
+	<td colspan="2" th:text="${trabajo.cliente.telefono}"></td>
 	</tr>
 	<tr>
+	<td th:text="#{label.coche.matricula}"></td>
+	<td  th:text="${trabajo.coche.matricula}"></td>
+	<td th:text="#{label.coche.marca_modelo}"></td>
+	<td  th:text="${trabajo.coche.marca}+ '_' +${trabajo.coche.modelo}"></td>
 	</tr>
 	<tr>
+	<td th:text="#{label.trabajo.prioridad}"></td>
+	<td  th:text="${trabajo.prioridad}"></td>
+	<td th:text="#{label.mecanico}"></td>
+	<td  th:text="${trabajo.mecanico.nombreCompleto}"></td>
 	</tr>
 	<tr>
+	<td th:text="#{label.trabajo.fechaEntrega}"></td>
+	<td  th:text="${trabajo.fechaEntrega}"></td>
+	<td th:text="#{label.trabajo.fechaInicio}"></td>
+	<td  th:text="${trabajo.fechaInicio}"></td>
 	</tr>
 	<tr>
+	<td th:text="#{label.trabajo.fechaFin}"></td>
+	<td  th:text="${trabajo.fechaFin}"></td>
+	<td th:text="#{label.trabajo.fechaRecogida}"></td>
+	<td  th:text="${trabajo.fechaRecogida}"></td>
+	</tr>
+	<tr><td th:text="#{label.trabajo.horas}"></td>
+	<td  th:text="${trabajo.horas}"></td>
+	<td th:text="#{label.trabajo.precio}"></td>
+	<td  th:text="${trabajo.precio}"></td>
 	</tr>
 	<tr>
-	</tr>
-	
-	
-	</table>
-	
+	</tr>	
+	</table>	
 	</div>
-	<div ></div>
+	
 	
 
 </body>

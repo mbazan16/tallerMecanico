@@ -28,8 +28,13 @@ public class Mecanico {
 	private String apellidos;
 	@Column(nullable = false)
 	private Double costeHora;
-	@OneToMany(mappedBy = "mecanico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Trabajo> trabajos = new ArrayList<>();
+	
+	
+	public String getNombreCompleto() {
+		return this.nombre+' '+this.apellidos;
+	}
+	
+	
 	
 
 }

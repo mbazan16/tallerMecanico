@@ -1,4 +1,4 @@
-package com.practica.tallerMecanico.controllers.fichaController;
+package com.practica.tallerMecanico.controllers.fichaTrabajo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
