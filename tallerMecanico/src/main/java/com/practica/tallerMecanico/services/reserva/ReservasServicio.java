@@ -124,7 +124,7 @@ public class ReservasServicio implements IReservasServicio{
 		List<Reserva> reservas = null;
 		try {
 			if(fecha!=null){
-				reservas = repository.findByCocheAndFechaReserva(null, fecha);
+				reservas = repository.findByFechaReserva(fecha);
 			}else if(estado!=null){
 				reservas = repository.findAllByReservaEstado(estado);
 			}else if(matricula != null) {
