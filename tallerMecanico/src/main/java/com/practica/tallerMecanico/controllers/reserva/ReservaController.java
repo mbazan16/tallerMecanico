@@ -32,6 +32,7 @@ public class ReservaController {
 		
 		servicio.crearReserva(reserva);
 		model.addAttribute("reserva", reserva);
+		listaReservas(model);
 		return "reserva";//dirige a una template igual pero con los campos del formulario de creacion de reserva rellenados con los datos de la reserva creada
 	}
 	
@@ -42,34 +43,40 @@ public class ReservaController {
 		
 		servicio.modificarReserva(reserva);
 		model.addAttribute("reserva", reserva);
+		listaReservas(model);
 		return "reserva";//dirige a una template igual pero con los campos del formulario de creacion de reserva rellenados con los datos de la reserva modificada
 	}
 	
-	@PutMapping
+	@PutMapping("/a")
 	public String anularReserva(Model model,Integer id, Reserva reserva) {
 		log.info("[anularReserva]");
 		log.debug("[anularReserva: "+id+reserva.toString()+"]");
 		
 		servicio.anularReserva(reserva);
 		model.addAttribute("reserva", reserva);
+		listaReservas(model);
 		return "reserva";//dirige a una template igual pero con los campos del formulario de creacion de reserva rellenados con los datos de la reserva modificada
 	}
 	
-	@GetMapping("/reserva")
+	@GetMapping
 	public String mostrarLista(Model model){
 		log.info("[mostrarLista]");
 		
-		List<Reserva> reservas = servicio.listarReservas();
-		model.addAttribute("listaReservas", reservas);
+		listaReservas(model);
 		return "reserva";
 	}
-	
-	@GetMapping("/reserva")
+
+	@GetMapping("/b")
 	public String buscarReservas(Model model,@RequestParam Date fecha,@RequestParam ReservaEstado estado,@RequestParam String matricula,@RequestParam String telefono){
 		log.info("[mostrarLista]");
 		
 		List<Reserva> reservas = servicio.buscar(fecha, estado, matricula, telefono);
 		model.addAttribute("listaReservas", reservas);//modify attribute??
 		return "reserva";
+	}
+
+	private void listaReservas(Model model) {
+		List<Reserva> reservas = servicio.listarReservas();
+		model.addAttribute("listaReservas", reservas);
 	}
 }
