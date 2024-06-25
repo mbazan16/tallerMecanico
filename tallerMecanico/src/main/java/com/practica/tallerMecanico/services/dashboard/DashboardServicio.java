@@ -48,7 +48,7 @@ public class DashboardServicio implements IDashboard{
 		List<Trabajo> trabajosPendientes = new ArrayList<Trabajo>();
 		try {
 			//La propia logica de negocio
-			trabajosPendientes= trabajoRepository.findAllByEstado(EstadoTrabajo.PEDIENTE);
+			trabajosPendientes= trabajoRepository.findAllByEstado(EstadoTrabajo.PENDIENTE);
 		}catch (Exception e) {
 			log.error("Exception", e);
 		}
