@@ -1,5 +1,6 @@
 package com.practica.tallerMecanico.services.common;
 
+@SuppressWarnings("serial")
 public class ServiceException extends Exception{
 	
 	private String code;
@@ -9,6 +10,10 @@ public class ServiceException extends Exception{
 		this.code = code;
 	}
 	
+	
+	public String getCode() {
+		return this.code;
+	}
 		
 
 }
