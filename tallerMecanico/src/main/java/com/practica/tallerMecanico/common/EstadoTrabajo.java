@@ -1,5 +1,5 @@
 package com.practica.tallerMecanico.common;
 
-public enum EstadoTrabajo {PROGRAMADO,PEDIENTE,EJECUCION,TERMINADO
+public enum EstadoTrabajo {PROGRAMADO,PENDIENTE,EJECUCION,TERMINADO
 
 }
