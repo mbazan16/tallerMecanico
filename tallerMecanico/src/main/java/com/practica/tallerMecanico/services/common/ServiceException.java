@@ -9,11 +9,13 @@ public class ServiceException extends Exception{
 		super();
 		this.code = code;
 	}
-	
+
 	
 	public String getCode() {
 		return this.code;
 	}
+
+
 		
 
 }
