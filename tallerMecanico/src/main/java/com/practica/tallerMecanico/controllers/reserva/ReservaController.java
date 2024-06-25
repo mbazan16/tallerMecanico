@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practica.tallerMecanico.common.ReservaEstado;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@RequestMapping("/reservas")
 public class ReservaController {
 	
 	@Autowired
@@ -47,6 +49,7 @@ public class ReservaController {
 		return "reserva";//dirige a una template igual pero con los campos del formulario de creacion de reserva rellenados con los datos de la reserva modificada
 	}
 	
+
 	@PutMapping("/a")
 	public String anularReserva(Model model,Integer id, Reserva reserva) {
 		log.info("[anularReserva]");
