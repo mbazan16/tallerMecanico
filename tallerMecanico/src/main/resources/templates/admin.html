@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Administración del Taller Mecánico <span class="car-theme car-icon"></span></h1>
+    </header>
+    <main class="container my-4">
+        <section id="reservas-pendientes" class="mb-5">
+            <h2>Listado de Reservas Pendientes <span class="car-theme car-icon"></span></h2>
+            <form th:action= "@{/buscadorReservas}" method="post">
+           <input type="text" id="buscarMatricula" placeholder="Matrícula"><a href="@{/buscadorMatricula}" th:href= img width="24" height="24" src="https://img.icons8.com/material-rounded/24/search.png" alt="search"/></a>
+            <input type="text" id="buscarTelefono" placeholder="Teléfono"></form><a href="@{/buscadorTelefono}"  th:href=img width="24" height="24" src="https://img.icons8.com/material-rounded/24/search.png" alt="search"/></a>
+            </form>
+            <table class="table table-striped table-bordered">
+   
+                <thead>
+                    
+                    <tr>
+    
+                        <th>Fecha Entrega</th>
+                        <th>Fecha Programada</th>
+						<th>Matrícula Vehículo</th>
+						<th>Telefono</th>
+                        <th>Tipo de Trabajo</th>
+                        <th>Cliente</th>
+                        <th>Prioridad</th>
+                        <th>        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="reserva : ${trabajoPendiente}">
+                        <td th:text="${reserva.fechaEntrega}"></td>
+                        <td th:text="${reserva.fechaProgramada}"></td>
+                        <td th:text="${reserva.matricula}"></td>
+                        <td th:text="${reserva.telefono}"></td>
+                        <td th:text="${reserva.tipo}"></td>
+                        <td th:text="${reserva.cliente}"></td>
+                        <td th:text="${reserva.prioridad}"></td>
+                        <td th:checkbox="${recepcionar}" th:></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <hr>
+        <section id="entregas-pendientes">
+            <h2>Listado de Entregas Pendientes <span class="car-theme car-icon"></span></h2>
+             <form th:action= "@{/buscadorEntregas}" method="post">
+             <input type="text" placeholder="Matrícula"><a href="@{/buscadorMatricula}" th:href= img width="24" height="24" src="https://img.icons8.com/material-rounded/24/search.png" alt="search"/></a>
+            <input type="text" placeholder="Teléfono"><a href="@{/buscadorTelefono}"  th:href=img width="24" height="24" src="https://img.icons8.com/material-rounded/24/search.png" alt="search"/></a>
+            </form>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+            
+                        <th>Fecha Fin</th>
+						<th>Matrícula Vehículo</th>
+						<th>Telefono</th>
+                        <th>Tipo de Trabajo</th>
+                        <th>Cliente</th>
+                        <th>        </th>
+    
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entrega : ${entregaPendiente}">
+                        <td th:text="${entrega.fechaEntrega}"></td>
+                        <td th:text="${entrega.matricula}"></td>
+                        <td th:text="${entrega.telefono}"></td>
+                        <td th:text="${entrega.tipoTrabajo}"></td>
+                        <td th:text="${entrega.cliente}"></td>
+                        <td th:checkbox="${entregar}"></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer class="bg-dark text-white text-center p-3 mt-5">
+        <p>© 2024 Taller Mecánico. Todos los derechos reservados.</p>
+    </footer>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

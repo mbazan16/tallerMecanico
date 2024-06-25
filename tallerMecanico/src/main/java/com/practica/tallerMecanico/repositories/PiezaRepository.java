@@ -8,5 +8,11 @@ import com.practica.tallerMecanico.entities.Pieza;
 
 public interface PiezaRepository extends JpaRepository<Pieza,Integer> {
 	
- List<Pieza>findAllById();
+
+ List<Pieza>findAllByNombre(String nombre);
+ List<Pieza>findAllByCodigo(String codigo);
+ List<Pieza>findAllByPrecio(float precio);
+ 
+ 
+ 
 }

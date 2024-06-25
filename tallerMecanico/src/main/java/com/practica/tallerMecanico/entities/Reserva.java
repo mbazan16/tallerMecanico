@@ -2,10 +2,15 @@ package com.practica.tallerMecanico.entities;
 
 import java.util.Date;
 
+import com.practica.tallerMecanico.common.ReservaEstado;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -18,25 +23,32 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Reserva {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaReserva;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaReserva;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaEntrega;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaEntrega;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaProgramacion;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaProgramacion;
 
-	private String Prioridad;
+    private String prioridad;
+    
+    private ReservaEstado reservaEstado;
 
-	private Integer idCoche;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "coche_id")
+    private Coche coche;
 
-	private Integer idCliente;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
-	private Integer idTrabajo;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "trabajo_id")
+    private Trabajo trabajo;
 }
