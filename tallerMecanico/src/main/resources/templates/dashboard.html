@@ -33,11 +33,12 @@
                     </form>
                     <!-- Tabla de trabajos programados -->
                     <div class="table-container">
-                        <table th:action="@{/trabajosHoy}" class="table table-bordered">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr th:each="trabajosHoy : ${trabajosHoy}">
                                     <th>Fecha</th>
                                     <th>Matrícula</th>
+                                    <th>Mecánico</th>
                                     <th>Tipo de Trabajo</th>
                                     <th>Horas estimadas</th>
                                 </tr>
@@ -46,44 +47,50 @@
                                 <tr>
                                     <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
                                     <td th:text="${trabajosHoy.coche}">xxx</td>
-                                    <td th:text="${trabajosHoy.tipo >xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.mecanico">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo">xxx</td>
+                                    <td th:text="${trabajosHoy.horas">xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr>
                                 <!-- Más filas aquí -->
                                 <tr>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
+                                    <td th:text="${trabajosHoy.coche}">xxx</td>
+                                    <td th:text="${trabajosHoy.mecanico">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo">xxx</td>
+                                    <td th:text="${trabajosHoy.horas">xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr> 
                                 <tr>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
+                                    <td th:text="${trabajosHoy.coche}">xxx</td>
+                                    <td th:text="${trabajosHoy.mecanico">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo">xxx</td>
+                                    <td th:text="${trabajosHoy.horas">xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr> 
                                 <tr>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
+                                    <td th:text="${trabajosHoy.coche}">xxx</td>
+                                    <td th:text="${trabajosHoy.mecanico">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo">xxx</td>
+                                    <td th:text="${trabajosHoy.horas">xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr> 
                                 <tr>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
+                                    <td th:text="${trabajosHoy.coche}">xxx</td>
+                                    <td th:text="${trabajosHoy.mecanico">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo">xxx</td>
+                                    <td th:text="${trabajosHoy.horas">xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr>
                                 <tr>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
-                                    <td>xxx</td>
+                                    <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
+                                    <td th:text="${trabajosHoy.coche}">xxx</td>
+                                    <td th:text="${trabajosHoy.mecanico">xxx</td>
+                                    <td th:text="${trabajosHoy.tipo">xxx</td>
+                                    <td th:text="${trabajosHoy.horas">xxx</td>
                                     <td><button class="btn btn-primary">Iniciar</button></td>
                                 </tr>
                             </tbody>
@@ -102,6 +109,7 @@
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Matrícula</th>
+                                        <th>Mecánico</th>
                                         <th>Tipo de Trabajo</th>
                                         <th>Horas estimadas</th>
                                         <th></th>
@@ -109,18 +117,20 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
+                                    <td th:text="${ejecucion.fechaProgramacion}">xxx</td>
+                                    <td th:text="${ejecucion.coche}">xxx</td>
+                                    <td th:text="${ejecucion.mecanico">xxx</td>
+                                    <td th:text="${ejecucion.tipo">xxx</td>
+                                    <td th:text="${ejecucion.horas">xxx</td>
                                         <td><button class="btn btn-primary">Terminar</button></td>
                                     </tr>
                                     <!-- Más filas aquí -->
                                     <tr>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
+                                    <td th:text="${ejecucion.fechaProgramacion}">xxx</td>
+                                    <td th:text="${ejecucion.coche}">xxx</td>
+                                    <td th:text="${ejecucion.mecanico">xxx</td>
+                                    <td th:text="${ejecucion.tipo">xxx</td>
+                                    <td th:text="${ejecucion.horas">xxx</td>
                                         <td><button class="btn btn-primary">Terminar</button></td>
                                     </tr>
                                 </tbody>
@@ -145,6 +155,7 @@
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Matrícula</th>
+                                        <th>Mecánico</th>
                                         <th>Tipo de Trabajo</th>
                                         <th>Horas estimadas</th>
                                         <th></th>
@@ -152,25 +163,28 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
+                                    <td th:text="${pendientes.fechaProgramacion}">xxx</td>
+                                    <td th:text="${pendientes.coche}">xxx</td>
+                                    <td th:text="${pendientes.mecanico">xxx</td>
+                                    <td th:text="${pendientes.tipo">xxx</td>
+                                    <td th:text="${pendientes.horas">xxx</td>
                                         <td><button class="btn btn-primary">Iniciar</button></td>
                                     </tr>
                                     <!-- Más filas aquí -->
                                     <tr>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
+                                    <td th:text="${pendientes.fechaProgramacion}">xxx</td>
+                                    <td th:text="${pendientes.coche}">xxx</td>
+                                    <td th:text="${pendientes.mecanico">xxx</td>
+                                    <td th:text="${pendientes.tipo">xxx</td>
+                                    <td th:text="${pendientes.horas">xxx</td>
                                         <td><button class="btn btn-primary">Iniciar</button></td>
                                     </tr>
-                                                                        <tr>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
-                                        <td>xxx</td>
+                                    <tr>
+                                    <td th:text="${pendientes.fechaProgramacion}">xxx</td>
+                                    <td th:text="${pendientes.coche}">xxx</td>
+                                    <td th:text="${pendientes.mecanico">xxx</td>
+                                    <td th:text="${pendientes.tipo">xxx</td>
+                                    <td th:text="${pendientes.horas">xxx</td>
                                         <td><button class="btn btn-primary">Iniciar</button></td>
                                     </tr>
                                 </tbody>
