@@ -110,7 +110,7 @@ public class DashboardServicio implements IDashboard {
         }
     }
     
-    //SERVICIO 5: cambiar el estado del trabajo en ejecución cuando se termine, dandole clic al botón "terminar"
+    //SERVICIO 6: cambiar el estado del trabajo en ejecución cuando se termine, dandole clic al botón "terminar"
     // cambia a terminado
 
     public void terminarTrabajo(Integer id) throws ServiceException {
