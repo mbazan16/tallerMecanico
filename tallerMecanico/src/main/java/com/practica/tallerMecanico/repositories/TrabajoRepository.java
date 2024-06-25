@@ -53,6 +53,9 @@ public interface TrabajoRepository extends JpaRepository<Trabajo, Integer> {
     
     @Query("select t from Trabajo t where t.coche.id = :cocheId and t.coche.tipo = :tipo")
     List<Trabajo> findAllByCocheIdAndCocheTipo(@Param("cocheId") Long cocheId, @Param("tipo") String tipo); // Tipo FindAllByCocheIDTipo
+    
+    @Query("select t from Trabajo t where t.tipo= :tipo")
+    List<Trabajo> findAllByTipo(String tipo); 
      
 }
 
