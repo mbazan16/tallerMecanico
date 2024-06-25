@@ -26,7 +26,6 @@ public class Trabajo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String tipo;
 	private String descripcion;
 	private int horas;
 	private EstadoTrabajo estado;
@@ -41,7 +40,19 @@ public class Trabajo {
 	private int kmSalida;
 	private boolean marcaObservacion;
 	private float precio;
+	
+	
+	@ManyToOne
+	private TipoTrabajo tipo;
+	
+	@ManyToOne	
 	private Mecanico mecanico;
+	
+	@ManyToOne	
+	private Coche coche;
+	
+	@ManyToOne	
+	private Cliente cliente;
 	
 
 	

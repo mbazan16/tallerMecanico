@@ -10,7 +10,7 @@ import com.practica.tallerMecanico.entities.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
 	//Lista de clientes por Coche
-	@Query("SELECT c FROM Cliente c JOIN c.coches c WHERE c.id = :cocheId")
+	@Query("SELECT c FROM Cliente c JOIN c.coches co WHERE co.id = :cocheId")
 	List<Cliente> findAllByCocheId(Long cocheId);
 	
 	//Cliente por teléfono
