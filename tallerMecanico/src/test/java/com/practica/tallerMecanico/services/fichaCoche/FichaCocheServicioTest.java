@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,9 +16,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.practica.tallerMecanico.entities.Cliente;
 import com.practica.tallerMecanico.entities.Coche;
+import com.practica.tallerMecanico.entities.Trabajo;
 import com.practica.tallerMecanico.repositories.ClienteRepository;
 import com.practica.tallerMecanico.repositories.CocheRepository;
+import com.practica.tallerMecanico.repositories.TrabajoRepository;
 import com.practica.tallerMecanico.services.common.FichaCocheException;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,11 +33,18 @@ class FichaCocheServicioTest {
 	private CocheRepository cocheRepository;
 	@Mock
 	private ClienteRepository clienteRepository;
+	
+	@Mock
+	private TrabajoRepository trabjoRepository;	
 
 	@InjectMocks
 	private FichaCocheServicio fichaCocheServicio;
 
 	private Coche coche;
+	
+	private List<Cliente> cliente;
+	
+	private List<Trabajo> trabajo;
 
 	@BeforeEach
 	public void setUp() {

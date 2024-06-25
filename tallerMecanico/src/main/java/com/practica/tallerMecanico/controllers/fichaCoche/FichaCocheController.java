@@ -42,9 +42,6 @@ public class FichaCocheController {
 		
 		return "fichaCoche";
 	}
-	
-	
-	
-	
+
 	
 }

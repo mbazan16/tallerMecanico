@@ -43,13 +43,9 @@ public class FichaCocheServicio implements IFichaCoche {
 		return clientes; 
 	}
 
-	public List<Trabajo> getTrabajosByCocheId(Long id){
-		
-		List<Trabajo> trabajos= trabajoRepository.findAllByCocheId(id);
-		
-		return trabajos;
-		
-	}
+	
+	
+	//MÉTODOS TRABAJOS
 	
 	public List<Trabajo> getTrabajoByTipoTrabajo(String tipo, LocalDate fecha){
 		
@@ -63,8 +59,6 @@ public class FichaCocheServicio implements IFichaCoche {
 			trabajos= trabajoRepository.findAll();
 		return trabajos;
 	}
-
-	//MÉTODOS TRABAJOS
 	
 	
 	// Historico Trabajadores
