@@ -7,14 +7,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="author" content="Sonia Fernandez" />
     <link th:href="@{/logos/favicon16.png}" rel="shortcut icon" type="image/png">
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/estilos.css}" rel="stylesheet" />
     <script th:src="@{https://use.fontawesome.com/releases/v6.3.0/js/all.js}" crossorigin="anonymous"></script>
     <title>Dashboard Taller Mecanico </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body class="">
-    <!-- Barra de navegación insertada desde un fragmento -->
-    <div th:insert="fragments :: nav"></div>
+    <!-- 
+    <div th:insert="~{fragments :: nav}"></div>-->
+    
+     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="container-fluid">
+                <img class="invert" th:src="@{/logos/logo384.png}" alt="TallerPepe">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" th:href="@{/reservas}">Reservas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" th:href="@{/entregas}">Entregas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" th:href="@{/piezas}">Piezas</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/profile}">Mi perfil</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/configuracion}">Configuración</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
 
     <!-- Contenedor principal -->
     <div class="container-fluid full-height text-center">
@@ -29,7 +74,7 @@
                             <label for="matricula">Matrícula</label>
                             <input type="text" id="matricula" name="matricula" class="form-control" placeholder="Ingrese la matrícula">
                         </div>
-                        <button type="submit" class="btn btn-primary">Buscar</button>
+                        <button type="submit" class="btn btn-secondary">Buscar</button>
                     </form>
                     <!-- Tabla de trabajos programados -->
                     <div class="table-container">
@@ -50,7 +95,7 @@
                                     <td th:text="${trabajosHoy.mecanico">xxx</td>
                                     <td th:text="${trabajosHoy.tipo">xxx</td>
                                     <td th:text="${trabajosHoy.horas">xxx</td>
-                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                    <td><button class="btn btn-secondary">Iniciar</button></td>
                                 </tr>
                                 <!-- Más filas aquí -->
                                 <tr>
@@ -59,7 +104,7 @@
                                     <td th:text="${trabajosHoy.mecanico">xxx</td>
                                     <td th:text="${trabajosHoy.tipo">xxx</td>
                                     <td th:text="${trabajosHoy.horas">xxx</td>
-                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                    <td><button class="btn btn-secondary">Iniciar</button></td>
                                 </tr> 
                                 <tr>
                                     <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
@@ -67,7 +112,7 @@
                                     <td th:text="${trabajosHoy.mecanico">xxx</td>
                                     <td th:text="${trabajosHoy.tipo">xxx</td>
                                     <td th:text="${trabajosHoy.horas">xxx</td>
-                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                    <td><button class="btn btn-secondary">Iniciar</button></td>
                                 </tr> 
                                 <tr>
                                     <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
@@ -75,7 +120,7 @@
                                     <td th:text="${trabajosHoy.mecanico">xxx</td>
                                     <td th:text="${trabajosHoy.tipo">xxx</td>
                                     <td th:text="${trabajosHoy.horas">xxx</td>
-                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                    <td><button class="btn btn-secondary">Iniciar</button></td>
                                 </tr> 
                                 <tr>
                                     <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
@@ -83,7 +128,7 @@
                                     <td th:text="${trabajosHoy.mecanico">xxx</td>
                                     <td th:text="${trabajosHoy.tipo">xxx</td>
                                     <td th:text="${trabajosHoy.horas">xxx</td>
-                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                    <td><button class="btn btn-secondary">Iniciar</button></td>
                                 </tr>
                                 <tr>
                                     <td th:text="${trabajosHoy.fechaProgramacion}">xxx</td>
@@ -91,7 +136,7 @@
                                     <td th:text="${trabajosHoy.mecanico">xxx</td>
                                     <td th:text="${trabajosHoy.tipo">xxx</td>
                                     <td th:text="${trabajosHoy.horas">xxx</td>
-                                    <td><button class="btn btn-primary">Iniciar</button></td>
+                                    <td><button class="btn btn-secondary">Iniciar</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -122,7 +167,7 @@
                                     <td th:text="${ejecucion.mecanico">xxx</td>
                                     <td th:text="${ejecucion.tipo">xxx</td>
                                     <td th:text="${ejecucion.horas">xxx</td>
-                                        <td><button class="btn btn-primary">Terminar</button></td>
+                                        <td><button class="btn btn-secondary">Terminar</button></td>
                                     </tr>
                                     <!-- Más filas aquí -->
                                     <tr>
@@ -131,7 +176,7 @@
                                     <td th:text="${ejecucion.mecanico">xxx</td>
                                     <td th:text="${ejecucion.tipo">xxx</td>
                                     <td th:text="${ejecucion.horas">xxx</td>
-                                        <td><button class="btn btn-primary">Terminar</button></td>
+                                        <td><button class="btn btn-secondary">Terminar</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -146,7 +191,7 @@
                                 <label for="matriculaPendiente">Matrícula</label>
                                 <input type="text" id="matriculaPendiente" name="matriculaPendiente" class="form-control" placeholder="Ingrese la matrícula">
                             </div>
-                            <button type="submit" class="btn btn-primary">Buscar</button>
+                            <button type="submit" class="btn btn-secondary">Buscar</button>
                         </form>
                         <!-- Tabla de trabajos pendientes -->
                         <div class="table-container">
@@ -168,7 +213,7 @@
                                     <td th:text="${pendientes.mecanico">xxx</td>
                                     <td th:text="${pendientes.tipo">xxx</td>
                                     <td th:text="${pendientes.horas">xxx</td>
-                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                        <td><button class="btn btn-secondary">Iniciar</button></td>
                                     </tr>
                                     <!-- Más filas aquí -->
                                     <tr>
@@ -177,7 +222,7 @@
                                     <td th:text="${pendientes.mecanico">xxx</td>
                                     <td th:text="${pendientes.tipo">xxx</td>
                                     <td th:text="${pendientes.horas">xxx</td>
-                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                        <td><button class="btn btn-secondary">Iniciar</button></td>
                                     </tr>
                                     <tr>
                                     <td th:text="${pendientes.fechaProgramacion}">xxx</td>
@@ -185,7 +230,7 @@
                                     <td th:text="${pendientes.mecanico">xxx</td>
                                     <td th:text="${pendientes.tipo">xxx</td>
                                     <td th:text="${pendientes.horas">xxx</td>
-                                        <td><button class="btn btn-primary">Iniciar</button></td>
+                                        <td><button class="btn btn-secondary">Iniciar</button></td>
                                     </tr>
                                 </tbody>
                             </table>
