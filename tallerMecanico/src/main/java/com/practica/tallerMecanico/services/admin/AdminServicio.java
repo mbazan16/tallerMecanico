@@ -1,7 +1,10 @@
 package com.practica.tallerMecanico.services.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AdminServicio implements IAdminServicio{
 
+	Logger log = LoggerFactory.getLogger(AdminServicio.class);
+	
 	@Autowired
 	EntregaRepository entregaRepository;
 	
@@ -28,8 +33,14 @@ public class AdminServicio implements IAdminServicio{
 	
 	@Override
 	public List<Reserva> getReservaPendientes() throws ReservaException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reserva> reservas = new ArrayList<>();
+		
+		try {
+			//reservas.forEach(()->{});
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return reservas;
 	}
 
 	@Override
@@ -39,17 +50,27 @@ public class AdminServicio implements IAdminServicio{
 	}
 	
 	@Override
-	public List<Reserva> buscadorReserva(String matricula, String telefone) throws ServiceException{
+	public List<IBuscar<Reserva, ServiceException>> buscadorReserva(String matricula, String telefone) throws ServiceException{
 		
 		return null;
 	}
 
 	@Override
-	public List<Entrega> buscadorEntrega(String matricula, String telefone) throws ServiceException{
+	public List<IBuscar<Entrega, ServiceException>> buscadorEntrega(String matricula, String telefone)
+			throws ServiceException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public void Recepcionar(Reserva resvera) {
+		// TODO Auto-generated method stub
+		
+	}
 
-
+	@Override
+	public void Ver() {
+		// TODO Auto-generated method stub
+		
+	}
 }

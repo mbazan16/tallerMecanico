@@ -14,8 +14,12 @@ public interface IAdminServicio {
 	
 	public List<Entrega> getEntregaPendientes()throws EntregaException;
 	
-	public List<Reserva> buscadorReserva (String matricula, String telefone) throws ServiceException;
+	public List<IBuscar<Entrega,ServiceException>> buscadorEntrega (String matricula, String telefone) throws ServiceException;
 	
-	public List<Entrega> buscadorEntrega (String matricula, String telefone) throws ServiceException;
+	public List<IBuscar<Reserva,ServiceException>> buscadorReserva (String matricula, String telefone) throws ServiceException;
+	
+	public void Recepcionar(Reserva resvera);
+	
+	public void Ver();
 
 }
